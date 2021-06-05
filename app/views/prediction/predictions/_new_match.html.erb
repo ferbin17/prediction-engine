@@ -1,0 +1,29 @@
+<div class="card text-center match-card new_match" id="match-<%= match.id %>-user-<%= @current_user.id %>">
+  <div class="card-header">
+    <%= t(:match_time) %> <strong><%= "#{format_time(match.match_time, :datetime)}" %></strong>
+  </div>
+  <div class="card-body">
+    <div class="match-details">
+      <%= hidden_field_tag :match_id, match.id %>
+      <div class="home-team team"><%= match.home_team.full_name %></div>
+      <div class="scoreline">
+        <div class="quantity quantity-div-left">
+          <input type="text" name="home_team_score" min="0" max="100" step="1" value="<%= prediction ? prediction.home_team_score : "-" %>" side="left" disabled readonly>
+        </div>
+        <div class="seperator"></div>
+        <div class="quantity quantity-div-right">
+          <input type="text" name="away_team_score" min="0" max="100" step="1" value="<%= prediction ? prediction.away_team_score : "-" %>" side="right" disabled readonly>
+        </div>
+      </div>
+      <div class="away-team team"><%= match.away_team.full_name %></div>
+    </div>
+    <button type="button" class="btn btn-success btn-sm predict-button"><%= t(:prediction) %></button>
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <%= t(:deadline) %>: <strong><%= "#{format_time(match.deadline, :datetime)}" %></strong><br>
+    <%= t(:friends_predicted, count: match.user_predictions.count) %>
+  </div>
+</div>

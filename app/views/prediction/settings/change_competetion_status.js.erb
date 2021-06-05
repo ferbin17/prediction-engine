@@ -1,0 +1,6 @@
+<% if @competetion %>
+  $(`#competetion-<%= @competetion.id %>-user-<%= @current_user.id %>`).replaceWith( `<%= render partial: "competetion",
+      locals: {competetion: @competetion} %>`);
+<% else %>
+  // Raise error
+<% end %>

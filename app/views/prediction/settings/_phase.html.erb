@@ -1,0 +1,31 @@
+<div class="accordion-item" id="phase-<%= phase.id%>-user-<%= @current_user.id %>">
+  <h2 class="accordion-header" id="heading-p-<%= phase.id %>">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-p-<%= phase.id %>" aria-expanded="false" aria-controls="collapse-p-<%= phase.id %>">
+      <%= phase.name %>
+    </button>
+  </h2>
+  <div id="collapse-p-<%= phase.id %>" class="accordion-collapse collapse" aria-labelledby="heading-p-<%= phase.id %>" data-bs-parent="#accordionPhases">
+    <div class="accordion-body">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <%= link_to t(:edit_phase), edit_phase_setting_path(id: phase.id),
+              remote: true, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t(:add_match), create_match_setting_path(id: phase.id),
+              remote: true, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t(:delete_phase), delete_phase_setting_path(id: phase.id),
+              method: :delete, remote: true, data: {confirm: "Are you sure ?"}, 
+              class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t(:confirm), confirm_phase_setting_path(id: phase.id),
+              remote: true, data: {confirm: "Are you sure ?"}, class: "nav-link" %>
+        </li>
+        <li class="nav-item"></li>
+      </ul>
+    </div>
+  </div>
+</div>

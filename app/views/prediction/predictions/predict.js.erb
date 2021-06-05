@@ -1,0 +1,10 @@
+$('#match-prediction-form').hide();
+$('#match-prediction-form').html('');
+<% if @match.can_edit? %>
+  $(`#match-<%= @match.id %>-user-<%= @current_user.id %>`).replaceWith( `<%= render partial: "new_match",
+      locals: {match: @match, prediction: @prediction} %>`);
+<% else %>
+  $(`#match-<%= @match.id %>-user-<%= @current_user.id %>`).replaceWith( `<%= render partial: "locked_match",
+    locals: {match: @match, prediction: @prediction} %>`);
+<% end %>
+$('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`)

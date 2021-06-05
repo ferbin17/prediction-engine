@@ -1,0 +1,6 @@
+<% if @match.present? %>
+  $('#match-prediction-form').html(`<%= render partial: "match_form",
+    locals: {match: @match, phase: @phase, prediction: @prediction} %>`);
+  $('#match-prediction-form').show();
+<% end %>
+$('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`)

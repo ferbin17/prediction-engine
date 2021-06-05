@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    <%= t(:point_table) %>
+  </div>
+  <div class="card-body">
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr class="table-dark">
+          <td class="table-dark">Position</td>
+          <td class="table-dark">Name</td>
+          <td class="table-dark">Score</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @users %>
+          <% @users.each_with_index do |user, position| %>
+            <tr class="table-dark">
+              <td class="table-dark"><%= position + 1 %></td>
+              <td class="table-dark"><%= user.full_name %></td>
+              <td class="table-dark"><%= user.total_point.to_i %></td>
+            </tr>
+          <% end %>
+        <% else %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

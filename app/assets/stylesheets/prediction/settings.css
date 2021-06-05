@@ -1,0 +1,18 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.settings-container{
+  margin: 2.5% auto;
+}
+
+.tab-header{
+  width: 80%;
+  float: left;
+}
+
+.action-buttons{
+  width: 20%;
+  float: right;
+}

@@ -1,0 +1,39 @@
+<head><%= javascript_include_tag 'prediction/predictions_controller' %></head> 
+<div class="card text-center matches-container">
+  <div class="card-header">
+    <% if @phase %>
+      <div class="arrow">
+        <%= left_arrow_link(@phase.previous_phase) %>
+      </div>
+      <div class="header-btw-arrows"><%= @phase.name %></div>
+      <div class="arrow">
+        <%= right_arrow_link(@phase.next_phase) %>
+      </div>
+    </div>
+    <div class="card-body">
+      <% if @matches.present? %>
+        <% @matches.each do |match| %>
+          <% if match.can_edit? %>
+            <%= render partial: "new_match", locals: {match: match, prediction: @user_predictions[match.id].try(:first)} %>
+          <% else %>
+            <%= render partial: "locked_match", locals: {match: match, prediction: @user_predictions[match.id].try(:first)} %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= t(:no_matches_created_by_admin) %>
+      <% end %>
+    </div>
+  <% else %>
+      <%= t(:no_phases_created) %>          
+    </div>
+    <div class="card-body">
+      <%= t(:please_contact_admin) %>
+    </div>
+  <% end %>
+  <div class="card-footer text-muted"><%= @competetion.name %></div>
+</div>
+
+<!-- Modal for prediction -->
+<div class="modal" tabindex="-1" id="match-prediction-form"></div>
+
+<script>convert_number_fields()</script>

@@ -1,0 +1,144 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+.matches-container{
+  margin: 2.5% auto;
+}
+
+.match-card{
+  margin: 2.5% 0;
+}
+
+.match-details{
+  display: flex;
+}
+
+.match-details div{
+  float: left;
+}
+
+.team{
+  width: 40%;
+  margin: 1% 0;
+}
+
+.scoreline{
+  width: 20%;
+}
+
+.quantity {
+  width: 40%;
+  position: relative;
+}
+
+.quantity-div-right{
+  float: right !important;
+}
+
+.seperator{
+  width: 20%;
+}
+
+.quantity input[type=number]::-webkit-inner-spin-button,
+.quantity input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity input[type=number]{
+  -moz-appearance: textfield;
+}
+
+.quantity input {
+  width: 5rem;
+  height: 2.5rem;
+  line-height: 1.65;
+  float: left;
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #eee;
+  text-align: center;
+  border-radius: 10%;
+}
+
+.match-form .quantity input{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.quantity input:focus {
+  outline: 0;
+}
+
+.quantity-nav {
+  float: left;
+  position: relative;
+  height: 42px;
+}
+
+.quantity-button {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #eee;
+  border-collapse: collapse;
+  width: 1.5rem;
+  text-align: center;
+  color: #333;
+  font-size: 13px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+  line-height: 1.7;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.quantity-right{
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+}
+
+.quantity-button.quantity-up {
+  position: absolute;
+  height: 50%;
+  top: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.quantity-button.quantity-down {
+  position: absolute;
+  bottom: 5%;
+  height: 50%;
+}
+
+.new_match .quantity-button,
+.locked_match .quantity-button{
+  visibility: hidden;
+}
+
+.predict-button{
+  margin-top: 1%;
+}
+
+.match-card .spinner-border{
+  display: none;
+}
+
+.match-card .spinner-border{
+  width: 1rem;
+  height: 1rem;
+  margin: -0.25% 1%;
+}
+
+.modal-dialog{
+  max-width: 650px !important;
+}
+
+.match-form{
+  text-align: center;
+}

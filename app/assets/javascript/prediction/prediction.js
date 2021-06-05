@@ -1,0 +1,1 @@
+//= require prediction/predictions_controller.js

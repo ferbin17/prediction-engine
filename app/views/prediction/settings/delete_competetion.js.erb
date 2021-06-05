@@ -1,0 +1,5 @@
+<% if @competetion && @competetion.is_deleted %>
+  $(`#competetion-<%= @competetion.id %>-user-<%= @current_user.id %>`).remove();
+<% else %>
+// Raise error
+<% end %>

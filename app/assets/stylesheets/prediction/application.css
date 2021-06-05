@@ -1,0 +1,105 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.navbar .container-fluid{
+  padding-right: var(--bs-gutter-x, 2rem);
+  padding-left: var(--bs-gutter-x, 2rem);
+}
+  
+.container.inner-container{
+  max-width: 1000px !important;
+}
+
+a.arrows{
+  text-decoration: none;
+  display: inline-block;
+  padding: 5% 10%;
+  background-color: #04AA6D;
+  color: white;
+}
+
+a.arrows:hover{
+  background-color: #ddd;
+  color: black;
+}
+
+.previous{
+  float: left;
+}
+
+.next{
+  float: right;
+}
+
+.round{
+  border-radius: 50%;
+}
+
+.arrow{
+  width: 20%;
+  float: left;
+}
+
+.header-btw-arrows{
+  width: 60%;
+  float: left;
+  margin: 1% 0;
+}
+
+a.disabled-link, a.disabled-link:hover{
+  text-decoration: none !important;
+  background-color: #ddd;
+  color: #fff;
+  cursor: default;
+}
+
+#errors{
+  margin-top: 2%;
+}
+
+.flash-alert{
+  text-align: center;
+}
+
+.nav .active{
+  color: #fff !important;
+}
+
+.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus,
+.dropdown-menu-sm.dropdown-item:hover, .dropdown-menu-sm .dropdown-item:focus{
+  color: #1e2125 !important;
+}
+
+.logout-sm{
+  display: none;
+}
+
+@media only screen and (max-width: 991px) {
+  .navbar .container{
+    padding-right: var(--bs-gutter-x, 2rem);
+    padding-left: var(--bs-gutter-x, 2rem);
+    max-width: initial !important;
+  }
+  
+  .dropdown.user-icon-drop{
+    display: none !important;
+  }
+  
+  .logout-sm{
+    display: block !important;
+  }
+
+}

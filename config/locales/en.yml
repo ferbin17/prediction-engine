@@ -1,0 +1,71 @@
+en:
+  activerecord:
+    errors:
+      models:
+        prediction/competetion:
+          attributes:
+            base:
+        prediction/phase:
+          attributes:
+            base:
+        prediction/team:
+          attributes:
+            base:
+        prediction/match:
+          attributes:
+            base:
+        prediction/user:
+          attributes:
+            base:
+        prediction/user_prediction:
+          attributes:
+            base:
+              modification_not_allowed: "Modification not allowed after deadline"
+            
+  
+  predictions: "Predictions"
+  prediction: "Prediction"
+  table: "Table"
+  friends_predicted: "%{count} friends predicted"
+  save: "Save"
+  already_predicted: "Prediction for this match already done"
+  settings: "Settings"
+  add_competetion: "Add competetion"
+  edit_competetion: "Edit competetion"
+  add_phase: "Add Phase"
+  delete_competetion: "Delete competetion"
+  deactivate_competetion: "Deactivate competetion"
+  activate_competetion: "Activate competetion"
+  edit_phase: "Edit phase"
+  add_match: "Add match"
+  delete_phase: "Delete phase"
+  confirm: "Confirm"
+  create: "Create"
+  something_went_wrong: "Something went wrong"
+  new_competetion: "New competetion"
+  name: "Name"
+  no_of_teams: "No. of teams"
+  no_of_phases: "no. of phases"
+  following_errors_encountered: "Following errors encountered"
+  prediction_saved: "Predicton saved"
+  match_time: "Match time"
+  deadline: Deadline
+  no_matches_created_by_admin: "No matches created by admin. Please contact admin."
+  no_phases_created: "No Phases created by admin"
+  please_contact_admin: "Please contact admin"
+  point_table: "Point table"
+  please: "Please"
+  username: "Username"
+  password: "Password"
+  sign_in: "Sign in"
+  remember_me: "Remember me"
+  welcome_user: "Welcome %{name}"
+  logout: "Logout"
+  change_your_default_password: "change your default password"
+  new_password: "New password"
+  confirm_password: "Confirm password"
+  wrong_crendials: "Wrong crendentials"
+  wrong_password: "Wrong password"
+  new_passwords_didnt_match: "New passwords didn't match"
+  password_changed_successfully: "Password changed successfully"
+  profile: "Profile"

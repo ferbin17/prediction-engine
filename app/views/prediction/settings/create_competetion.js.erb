@@ -1,0 +1,18 @@
+<% if request.post? %>
+  <% if @errors %>
+  // construct error
+  <% else %>
+    // Show success
+    $('#form-modal').hide();
+    $('#accordionCompetetion').append(`<%= render partial: "competetion",
+      locals: {competetion: @competetion} %>`)
+  <% end %>
+<% else %>
+  <% if @competetion.present? %>
+    $('#form-modal').html(`<%= render partial: "competetion_form",
+      locals: {competetion: @competetion} %>`);
+    $('#form-modal').show();
+  <% else %>
+    alert(<%= t(:something_went_wrong) %>)
+  <% end %>
+<% end %>
