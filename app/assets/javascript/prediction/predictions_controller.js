@@ -40,7 +40,7 @@ $("body").delegate(".predict-button", "click", function(){
   spinner.css("display", "inline-block");
   $.ajax({
     type: "GET",
-    url: "predictions/match_popup",
+    url: "/predictions/match_popup",
     data : {id: match_id},
     success: function() {
       spinner.hide();
