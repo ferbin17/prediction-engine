@@ -73,7 +73,7 @@ en:
   new_password_different_from_current_password: "New password must be different from current password"
   login_request: "Login request"
   request: "Request"
-  request_token_generated: "Request token generated. Please send the request token to the admin<br>Your request token is <strong%{token}</strong"
+  request_token_generated: "Request token generated. Please send the request token to the admin<br>Your request token is <strong>%{token}</strong"
   request_token_already_generated: "You have already generated request token. Please contact the admin to activate the account.<br>Your request token is <strong>%{token}</strong>"
   player_login_request: "Player login requests"
   position: "Position"
