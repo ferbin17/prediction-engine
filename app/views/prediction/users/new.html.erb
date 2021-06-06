@@ -1,0 +1,28 @@
+<main class="form-signin text-center">
+  <%= form_for @user, class: "row g-3" do |f| %>
+    <h1 class="h3 mb-3 fw-normal"> <%= t(:login_request) %></h1>
+
+    <div class="form-floating">
+      <%= f.text_field :full_name, class: "form-control", id: "inputFullname", placeholder: t(:full_name), autocomplete: "off", required: true %>
+      <label for="inputFullname"><%= t(:full_name) %></label>
+    </div>
+    
+    <div class="form-floating">
+      <%= f.text_field :username, class: "form-control", id: "inputUsername", placeholder: t(:username), autocomplete: "off", required: true %>
+      <label for="inputUsername"><%= t(:username) %></label>
+    </div>
+    
+    <div class="form-floating">
+      <%= f.password_field :password, class: "form-control", id: "inputPassword", placeholder: t(:password), required: true %>
+      <label for="inputPassword"><%= t(:password) %></label>
+    </div>
+    
+    <div class="form-floating">
+      <%= f.text_field :phone_no, class: "form-control number_field", id: "inputPhoneno", placeholder: t(:phone_no), required: true %>
+      <label for="inputPhoneno"><%= t(:phone_no) %></label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit"><%= t(:request) %></button>
+    <p class="mt-5 mb-3 text-muted">&copy; Footy Boyz 2021</p>
+  <% end %>
+</main>

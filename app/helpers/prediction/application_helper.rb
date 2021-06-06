@@ -11,7 +11,7 @@ module Prediction
     end
     
     def active_tab(params, link)
-      if params[:controller] == "prediction/predictions"
+      if ["prediction/predictions", "prediction/users"].include?(params[:controller]) 
         if params[:action] == link
           return "active"
         end

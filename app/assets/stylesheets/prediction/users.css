@@ -40,6 +40,10 @@ body{
   margin: 10% auto;
 }
 
+.create-form{
+  margin: 0% auto;
+}
+
 .form-signin .checkbox {
   font-weight: 400;
 }
@@ -48,14 +52,23 @@ body{
   z-index: 2;
 }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
+.form-signin input {
   margin-bottom: 2%;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.table-card-header{
+  width: 50%;
+  float: left;
+}
+
+.table-card-actions{
+  width: 50%;
+  float: right;
+  text-align: right;
+}
+
+.table-card-actions .nav-link{
+  padding: 0;
 }

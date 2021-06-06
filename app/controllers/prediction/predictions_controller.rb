@@ -10,7 +10,7 @@ module Prediction
       @user_predictions = @current_user.user_predictions_in_phase(@phase.id) if @phase
       if request.post?
         @errors = PredictionCreator.call(@current_user, prediction_params)
-        flash[:success] = (@errors.empty? ? t(:prediction_saved) : nil)
+        flash.now[:success] = (@errors.empty? ? t(:prediction_saved) : nil)
         @match = Match.find_by_id(prediction_params[:match_id])
         @prediction = @current_user.user_predictions.find_by_match_id(prediction_params[:match_id])
         respond_to :js
@@ -26,7 +26,11 @@ module Prediction
     end
     
     def table
-      @users = User.players.left_joins(:user_predictions).select(:full_name, :total_point).group(:id).order('total_point DESC, COUNT(prediction_user_predictions.id) ASC')
+      @users = User.active.players.left_joins(:user_predictions).select(:id, :full_name, :total_point).
+          group(:id).order('total_point DESC, COUNT(prediction_user_predictions.id) ASC').includes(:user_predictions)
+    end
+    
+    def rules
     end
     
     private

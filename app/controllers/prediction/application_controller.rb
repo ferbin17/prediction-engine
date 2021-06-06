@@ -18,7 +18,7 @@ module Prediction
 
       
       def current_user
-        @current_user ||= User.find_by_id(current_user_id)
+        @current_user ||= User.active.find_by_id(current_user_id)
       end
       
       def jwt_token(user_id)

@@ -1,11 +1,13 @@
 Prediction::Engine.routes.draw do
-  resources :users, only: [] do
+  resources :users, only: [:index, :new, :create] do
     collection do
       get 'login'
       post 'login'
       get 'logout'
       get 'change_password'
       post 'change_password'
+      get 'approval'
+      post 'approval'
     end
   end
   
@@ -15,6 +17,7 @@ Prediction::Engine.routes.draw do
       post 'predict'
       get 'match_popup'
       get 'table'
+      get 'rules'
     end
   end
   

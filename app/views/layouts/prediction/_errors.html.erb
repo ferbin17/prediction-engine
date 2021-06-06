@@ -1,7 +1,7 @@
 <% ["primary", "secondary", "success", "danger", "warning", "info", "light", "dark"].each do |alert| %>
   <% if flash[alert.to_sym].present? %>
     <div class="alert alert-<%= alert %> alert-dismissible fade show flash-alert" role="alert">
-      <%= flash[alert.to_sym] %>
+      <%= raw(flash[alert.to_sym]) %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <script>$("html, body").animate({ scrollTop: 0 }, "slow");</script>

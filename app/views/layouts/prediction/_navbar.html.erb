@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+  <div class="container">
+    <%= link_to(root_path, class: "navbar-brand") do %>
+      <%= image_tag "prediction/football-icon.png", class: "bi me-2", alt: "football-icon", width: "40", height: "40" %>
+      <%= t(:predictions) %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <% if @current_user %>
+          <% unless @current_user.is_admin? %>
+            <li class="nav-item">
+              <%= link_to t(:predict), root_path, class: "nav-link #{active_tab(params, "predict")}" %>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "table")}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to t(:rules), rules_predictions_path, class: "nav-link #{active_tab(params, "rules")}" %>
+          </li>
+          <% if @current_user.is_admin? %>
+            <li class="nav-item">
+              <%= link_to t(:settings), settings_path, class: "nav-link #{active_tab(params, "settings")}" %>
+            </li>
+          <% end %>
+
+          <li class="nav-item logout-sm">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag "prediction/user-icon.png", class: "rounded-circle", alt: "user-icon", width: "32", height: "32" %>
+            </a>
+            <ul class="dropdown-menu bg-dark dropdown-menu-sm" aria-labelledby="navbarDropdown">
+              <li class="nav-item"><%= link_to t(:profile), "#", class: "dropdown-item text-white" %></li>
+              <li><hr class="dropdown-divider"></li>
+              <li class="nav-item"><%= link_to t(:logout), logout_users_path, class: "dropdown-item text-white" %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to t(:login_request), new_user_path, class: "nav-link #{active_tab(params, "new")}" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <% if @current_user %>
+      <div class="dropdown text-end bg-dark user-icon-drop">
+        <a href="#" class="d-block link-dark text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= image_tag "prediction/user-icon.png", class: "rounded-circle", alt: "user-icon", width: "32", height: "32" %>
+        </a>
+        <ul class="dropdown-menu text-small  bg-dark" aria-labelledby="dropdownUser">
+          <li>
+            <%= link_to t(:profile), "#", class: "dropdown-item text-white" %>
+          </li>
+          <li><hr class="dropdown-divider text-white"></li>
+          <li>
+            <%= link_to t(:logout), logout_users_path, class: "dropdown-item text-white" %>
+          </li>
+        </ul>
+      <% end %>
+  </div>
+</nav>

@@ -1,16 +1,19 @@
 <div class="card">
   <div class="card-header">
-    <%= t(:point_table) %>
+    <div class="table-card-header"><%= t(:player_login_request) %></div>
+    <div class="table-card-actions">
+      <%= link_to t(:login_request_approval), approval_users_path, class: "nav-link" %>
+    </div>
   </div>
   <div class="card-body">
     <table class="table table-dark table-hover">
       <thead>
         <tr class="table-dark">
-          <td class="table-dark"><%= t(:position) %></td>
+          <td class="table-dark">#</td>
           <td class="table-dark"><%= t(:name) %></td>
-          <td class="table-dark"><%= t(:total_no_of_predictions) %></td>
-          <td class="table-dark"><%= t(:no_of_calculated_predictions) %></td>
-          <td class="table-dark"><%= t(:score) %></td>
+          <td class="table-dark"><%= t(:username) %></td>
+          <td class="table-dark"><%= t(:phone_no) %></td>
+          <td class="table-dark"><%= t(:request_token) %></td>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +22,9 @@
             <tr class="table-dark">
               <td class="table-dark"><%= position + 1 %></td>
               <td class="table-dark"><%= user.full_name %></td>
-              <td class="table-dark"><%= user.user_predictions.count %></td>
-              <td class="table-dark"><%= user.user_predictions.calculated_predictions.count %></td>
-              <td class="table-dark"><%= user.total_point.to_i %></td>
+              <td class="table-dark"><%= user.username %></td>
+              <td class="table-dark"><%= user.phone_no %></td>
+              <td class="table-dark"><%= user.request_token %></td>
             </tr>
           <% end %>
         <% else %>

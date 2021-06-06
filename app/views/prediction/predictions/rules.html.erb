@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">
+    <%= t(:rules) %>
+  </div>
+  <div class="card-body">
+    <div class="container inner-container">
+      <div class="accordion" id="accordionRules">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingDeadline">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDeadline" aria-expanded="false" aria-controls="collapseDeadline">
+              <%= t(:deadline_rule) %>
+            </button>
+          </h2>
+          <div id="collapseDeadline" class="accordion-collapse collapse" aria-labelledby="headingDeadline" data-bs-parent="#accordionRules">
+            <div class="accordion-body">
+              <strong><%= raw(t(:deadline_rule_description)) %></strong> 
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingPoints">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePoints" aria-expanded="false" aria-controls="collapsePoints">
+              <%= t(:points_rules) %>
+            </button>
+          </h2>
+          <div id="collapsePoints" class="accordion-collapse collapse" aria-labelledby="headingPoints" data-bs-parent="#accordionRules">
+            <div class="accordion-body">
+              <strong><%= raw(t(:points_rules_description)) %></strong> 
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTable">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
+              <%= t(:point_table_rules) %>
+            </button>
+          </h2>
+          <div id="collapseTable" class="accordion-collapse collapse" aria-labelledby="headingTable" data-bs-parent="#accordionRules">
+            <div class="accordion-body">
+              <strong><%= raw(t(:point_table_rules_description)) %></strong> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
