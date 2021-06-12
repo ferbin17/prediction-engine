@@ -1,0 +1,29 @@
+<div class="container inner-container settings-container">
+  <div class="accordion" id="accordionCompetetionPhases">
+    <div class="accordion-item" id="competetion-<%= @competetion.id %>-user-<%= @current_user.id %>">
+      <h2 class="accordion-header" id="heading-c-<%= @competetion.id %>">
+        <button class="accordion-button competetion-phases-index" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-c-<%= @competetion.id %>" aria-expanded="true" aria-controls="collapse-c-<%= @competetion.id %>">
+          <%= "#{@competetion.name} #{t(:phases)}" %>
+        </button>
+      </h2>
+      <div id="collapse-c-<%= @competetion.id %>" class="accordion-collapse collapse show" aria-labelledby="heading-c-<%= @competetion.id %>" data-bs-parent="#accordionCompetetionPhases">
+        <div class="accordion-body" id="phases-accordion">
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <%= link_to t(:add_phase), new_phase_path(id: @competetion.id),
+                  remote: true, class: "nav-link" %>
+            </li>
+          </ul>
+          <% if @phases %>
+            <% @phases.each do |phase| %>
+              <%= render partial: "prediction/phases/phase", locals: {phase: phase} %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for prediction -->
+<div class="modal" tabindex="-1" id="form-modal"></div>

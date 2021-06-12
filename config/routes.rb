@@ -21,25 +21,28 @@ Prediction::Engine.routes.draw do
     end
   end
   
-  resources :settings, only: [:index] do
-    collection do
-      get 'create_competetion'
-      post 'create_competetion'
-    end
-    
+  resources :settings, only: [:index] do  
     member do
-      get 'edit_competetion'
-      post 'edit_competetion'
-      get 'change_competetion_status'
-      delete 'delete_competetion'
-      get 'create_phase'
-      post 'create_phase'
-      get 'edit_phase'
-      post 'edit_phase'
-      delete 'delete_phase'
-      get 'confirm_phase'
       get 'create_match'
       post 'create_match'
+    end
+  end
+  
+  resources :competetions, except: [:index] do
+    member do
+      get 'change_competetion_status'
+    end
+  end
+  
+  resources :phases, except: [:index] do
+    member do
+      get 'confirm_phase'
+    end
+  end
+  
+  resources :matches, except: [:index, :show] do
+    member do
+      get 'confirm_match'
     end
   end
   

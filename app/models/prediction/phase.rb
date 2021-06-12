@@ -1,5 +1,6 @@
 module Prediction
   class Phase < ApplicationRecord
+    default_scope -> { where(is_active: true, is_deleted: false) } 
     belongs_to :competetion
     has_many :matches, dependent: :destroy
     validates_presence_of :name, :order
@@ -8,7 +9,8 @@ module Prediction
     validates :name, uniqueness: {scope: [:competetion_id, :is_deleted]}
     validates :order, uniqueness: {scope: [:competetion_id, :is_deleted]}
     after_save :update_competetion_phases
-    scope :active, -> { where(setup_completed: true)}
+    scope :active, -> { where(is_active: true) }
+    scope :not_deleted, -> { unscoped.where(is_deleted: false)}
     scope :current_phase, -> { active.order(:order).limit(1) }
     
     # Returns previous phase id if present

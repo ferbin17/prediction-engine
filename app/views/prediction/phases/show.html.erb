@@ -1,0 +1,35 @@
+<div class="container inner-container settings-container">
+  <div class="accordion" id="accordionPhaseMatches">
+    <div class="accordion-item" id="competetion-<%= @phase.id %>-user-<%= @current_user.id %>">
+      <h2 class="accordion-header" id="heading-c-<%= @phase.id %>">
+        <button class="accordion-button competetion-phases-index" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-c-<%= @phase.id %>" aria-expanded="true" aria-controls="collapse-c-<%= @phase.id %>">
+          <%= "#{@phase.name} #{t(:matches)}" %>
+        </button>
+      </h2>
+      <div id="collapse-c-<%= @phase.id %>" class="accordion-collapse collapse show" aria-labelledby="heading-c-<%= @phase.id %>" data-bs-parent="#accordionPhaseMatches">
+        <div class="accordion-body" id="phases-accordion">
+          <ul class="nav justify-content-center">
+            <li class="nav-item">
+              <%= link_to t(:add_match), new_match_path(id: @phase.id), remote: true,
+                  class: "nav-link" %>
+            </li>
+          </ul>
+          <% if @matches %>
+            <div class="album">
+              <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="accordionMatches">
+                  <% @matches.each do |match| %>
+                    <%= render partial: "prediction/matches/match", locals: {match: match, mode: false} %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for prediction -->
+<div class="modal" tabindex="-1" id="form-modal"></div>

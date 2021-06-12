@@ -3,8 +3,9 @@ require_dependency "../services/prediction/prediction_creator"
 
 module Prediction
   class PredictionsController < ApplicationController
-    before_action :check_permission, except: [:table]
+    before_action :check_player_permission, except: [:table]
     
+    # Create predictions
     def predict
       fetch_matches
       @user_predictions = @current_user.user_predictions_in_phase(@phase.id) if @phase
@@ -17,6 +18,7 @@ module Prediction
       end
     end
     
+    # Prediction form popup
     def match_popup
       @match = Match.find_by_id(params[:id])
       if @match
@@ -25,32 +27,32 @@ module Prediction
       end
     end
     
+    # Point table
     def table
-      @users = User.active.players.left_joins(:user_predictions).select(:id, :full_name, :total_point).
+      @users = User.players.left_joins(:user_predictions).select(:id, :full_name, :total_point).
           group(:id).order('total_point DESC, COUNT(prediction_user_predictions.id) ASC').includes(:user_predictions)
     end
     
+    # Shows rules
     def rules
     end
     
     private
+      # Fetch matches from parameters else first competetion
       def fetch_matches
         if params[:id].present?
           @phase = Phase.find_by_id(params[:id])
           @competetion = @phase.competetion
         else
-          @competetion = Competetion.active.first
+          @competetion = Competetion.first
           @phase = @competetion.phases.current_phase.try(:first)
         end
         @matches = @phase.matches.order(:match_time).includes(:home_team, :away_team, :user_predictions) if @phase
       end
       
+      # User prediction parameters
       def prediction_params
         params.require(:prediction).permit(:match_id, :home_team_score, :away_team_score)
-      end
-      
-      def check_permission
-        redirect_to settings_path if @current_user.is_admin?
       end
   end
 end

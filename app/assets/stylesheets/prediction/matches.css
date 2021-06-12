@@ -1,0 +1,13 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#matchTime select{
+  width: 30%;
+  margin: 1% 0;
+}
+
+#matchTime .col-sm-7:nth-child(4){
+  display: none;
+}

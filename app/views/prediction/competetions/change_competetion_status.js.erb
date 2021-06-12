@@ -1,6 +1,5 @@
 <% if @competetion %>
   $(`#competetion-<%= @competetion.id %>-user-<%= @current_user.id %>`).replaceWith( `<%= render partial: "competetion",
       locals: {competetion: @competetion} %>`);
-<% else %>
-  // Raise error
 <% end %>
+$('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);

@@ -1,0 +1,5 @@
+<% if @phase %>
+  $(`#phase-<%= @phase.id %>-user-<%= @current_user.id %>`).replaceWith( `<%= render partial: "phase",
+      locals: {phase: @phase} %>`);
+<% end %>
+$('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);

@@ -1,10 +1,11 @@
-<% action = (competetion.id.nil? ? :create_competetion : :edit_competetion) %>
-<%= form_for :competetion, url: {action: action}, remote: true, class: "row g-3 needs-validation" do |f| %>
+<%= form_for competetion, remote: true, class: "row g-3 needs-validation" do |f| %>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><%= t(:new_competetion)%></h5>
+        <h5 class="modal-title"><%= competetion.id.nil? ? t(:new_competetion) : t(:edit_competetion) %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#form-modal').hide()"></button>
+      </div>
+      <div class="modal-body" id="validation-errors">
       </div>
       <div class="modal-body">
         <div class="card">

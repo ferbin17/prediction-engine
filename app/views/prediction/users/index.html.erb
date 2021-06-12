@@ -2,7 +2,7 @@
   <div class="card-header">
     <div class="table-card-header"><%= t(:player_login_request) %></div>
     <div class="table-card-actions">
-      <%= link_to t(:login_request_approval), approval_users_path, class: "nav-link" %>
+      <%= link_to t(:login_request_approval), approval_users_path, class: "nav-link" if @users.present? %>
     </div>
   </div>
   <div class="card-body">

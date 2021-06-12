@@ -1,5 +1,6 @@
 module Prediction
   class Match < ApplicationRecord
+    default_scope -> { where(is_active: true, is_deleted: false) } 
     belongs_to :competetion
     belongs_to :phase
     belongs_to :home_team, foreign_key: :home_team_id, class_name: "Team"
@@ -7,10 +8,13 @@ module Prediction
     has_many :user_predictions, dependent: :destroy
     validates_presence_of :match_time
     validates :home_team_score, :away_team_score, numericality: { only_integer: true }, if: Proc.new{|m| (m.home_team_score || m.away_team_score)}
+    validate :same_teams, if: Proc.new{|m| m.home_team && m.away_team}
     after_save :update_phase_status, if: Proc.new{|m| m.match_ended_changed?}
     after_save :update_competetion_dates, if: Proc.new{|m| m.match_time_changed?}
     after_save :update_phase_dates, if: Proc.new{|m| m.match_time_changed?}
     after_save :update_phase_matches_count
+    scope :active, -> { where(is_active: true) }
+    scope :not_deleted, -> { unscoped.where(is_deleted: false)}
     scope :finished_matches, -> { where(match_ended: true) }
     scope :unfinished_matches, -> { where(match_ended: false) }
     
@@ -39,6 +43,11 @@ module Prediction
     end
     
     private
+      # Validate if hoem and away team are same
+      def same_teams
+        errors.add(:home_team, :home_and_away_same) if home_team == away_team
+      end
+      
       # Update number of matches
       def update_phase_matches_count
         phase.update(no_of_matches: phase.matches.count)

@@ -1,0 +1,11 @@
+<% if @errors %>
+  $('#validation-errors').html(`<%= render partial: "layouts/prediction/error_messages",
+    locals: {errors: @errors} %>`);
+  $('#validation-errors').show();
+<% else %>
+  $('#validation-errors').hide();
+  $('#form-modal').hide();
+  $('#accordionCompetetion').append(`<%= render partial: "phase",
+    locals: {phase: @phase} %>`);
+  $('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);
+<% end %>

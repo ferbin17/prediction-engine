@@ -14,6 +14,10 @@ en:
         prediction/match:
           attributes:
             base:
+            home_team:
+              home_and_away_same: "Home team and away team can't be same"
+            match_time:
+              invalid_date_time: "Invalid date"
         prediction/user:
           attributes:
             base:
@@ -21,40 +25,28 @@ en:
           attributes:
             base:
               modification_not_allowed: "Modification not allowed after deadline"
-            
   
-  predictions: "Predictions"
-  prediction: "Prediction"
-  table: "Table"
-  friends_predicted: "%{count} friends predicted"
-  save: "Save"
-  already_predicted: "Prediction for this match already done"
-  settings: "Settings"
-  add_competetion: "Add competetion"
-  edit_competetion: "Edit competetion"
-  add_phase: "Add Phase"
-  delete_competetion: "Delete competetion"
-  deactivate_competetion: "Deactivate competetion"
-  activate_competetion: "Activate competetion"
-  edit_phase: "Edit phase"
-  add_match: "Add match"
-  delete_phase: "Delete phase"
-  confirm: "Confirm"
+  # Common
   create: "Create"
+  save: "Save"
+  confirm: "Confirm"
+  unconfirm: "Unconfirm"
   something_went_wrong: "Something went wrong"
-  new_competetion: "New competetion"
   name: "Name"
-  no_of_teams: "No. of teams"
-  no_of_phases: "no. of phases"
-  following_errors_encountered: "Following errors encountered"
-  prediction_saved: "Predicton saved"
-  match_time: "Match time"
-  deadline: Deadline
-  no_matches_created_by_admin: "No matches created by admin. Please contact admin."
-  no_phases_created: "No Phases created by admin"
-  please_contact_admin: "Please contact admin"
-  point_table: "Point table"
+  table: "Table"
   please: "Please"
+  request: "Request"
+  position: "Position"
+  submit: "Submit"
+  approve: "Approve"
+  score: "Score"
+  deadline: "Deadline"
+  activate: "Activate"
+  deactivate: "Deactivate"
+  order: "Order"
+  following_errors_encountered: "Following errors encountered"
+
+  # User
   username: "Username"
   password: "Password"
   phone_no: "Phone no"
@@ -72,20 +64,79 @@ en:
   profile: "Profile"
   new_password_different_from_current_password: "New password must be different from current password"
   login_request: "Login request"
-  request: "Request"
   request_token_generated: "Request token generated. Please send the request token to the admin<br>Your request token is <strong>%{token}</strong"
   request_token_already_generated: "You have already generated request token. Please contact the admin to activate the account.<br>Your request token is <strong>%{token}</strong>"
   player_login_request: "Player login requests"
-  position: "Position"
-  total_no_of_predictions: "Total no. of predictions"
-  no_of_calculated_predictions: "Total no. of calculated predictions"
-  score: "Score"
   no_players_registered_yet: "No players registers yet"
   login_request_approval: "Login request approval"
-  submit: "Submit"
   no_player_found_at_request_token: "No player found with the request_token, %{token}"
-  approve: "Approve"
   player_login_approved: "Player login approved"
+  
+  # Competetion
+  competetion_created: "Competetion created successfully"
+  competetion_updated: "Competetion updated successfully"
+  competetion_deleted: "Competetion deleted successfully"
+  competetion_not_found: "Competetion not found"
+  competetion_changed: "Competetion %{action}d successfully"
+  add_competetion: "Add competetion"
+  edit_competetion: "Edit competetion"
+  delete_competetion: "Delete competetion"
+  deactivate_competetion: "Deactivate competetion"
+  activate_competetion: "Activate competetion"
+  new_competetion: "New competetion"
+  no_of_teams: "No. of teams"
+  no_of_phases: "no. of phases"
+  
+  # Phase
+  phases: "Phases"
+  add_phase: "Add phase"
+  edit_phase: "Edit phase"
+  delete_phase: "Delete phase"
+  new_phase: "New phase"
+  no_of_matches: "no. of Matches"
+  phase_created: "Phase created successfully"
+  phase_updated: "Phase updated successfully"
+  phase_deleted: "Phase deleted successfully"
+  phase_not_found: "Phase not found"
+  phase_changed: "Phase %{action}d successfully"
+  
+  
+  # Matches
+  match: "match"
+  matches: "Matches"
+  match_time: "Match time"
+  add_match: "Add match"
+  new_match: "New match"
+  edit_match: "Edit match"
+  delete_match: "Delete match"
+  match_created: "Match created successfully"
+  match_updated: "Match updated successfully"
+  match_deleted: "Match deleted successfully"
+  match_not_found: "Match not found"
+  match_changed: "Match %{action}d successfully"
+  home_team: "Home team"
+  away_team: "Away team"
+  mark_as_match_ended: "Mark as Match Ended"
+  submit_match_score: "Submit Match Score"
+  calculate_prediction_score: "Calculate Prediction Score"
+  
+  # User Prediction
+  predictions: "Predictions"
+  prediction: "Prediction"
+  friends_predicted: "%{count} friends predicted"
+  already_predicted: "Prediction for this match already done"
+  prediction_saved: "Predicton saved"
+  no_matches_created_by_admin: "No matches created by admin. Please contact admin."
+  no_phases_created: "No Phases created by admin"
+  please_contact_admin: "Please contact admin"
+  point_table: "Point table"
+  total_no_of_predictions: "Total no. of predictions"
+  no_of_calculated_predictions: "Total no. of calculated predictions"
+  
+  # settings
+  settings: "Settings"
+  
+  # Rules
   rules: "Rules"
   deadline_rule: "Deadline rule"
   deadline_rule_description: "Only predictions made before deadline will be considered for score calculation"
@@ -93,3 +144,4 @@ en:
   points_rules_description: "1 point will rewarded for predicting both home team score and away team score correctly. 0 for all other cases"
   point_table_rules: "Point table rules"
   point_table_rules_description: "Point table is ordered with respect to the following factors:<br>+ Points scored<br>+ No. of predictions made<br>+ Full name"
+  

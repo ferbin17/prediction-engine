@@ -1,0 +1,9 @@
+<% if errors %>
+  <ul class="errorMessages">
+    <% errors.each do |error| %>
+      <li>    
+        <span><%= t(error.attribute) %>:</span> <%= "#{t(error.attribute)} #{error.message}" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

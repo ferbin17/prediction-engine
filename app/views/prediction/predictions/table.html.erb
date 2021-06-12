@@ -8,9 +8,9 @@
         <tr class="table-dark">
           <td class="table-dark"><%= t(:position) %></td>
           <td class="table-dark"><%= t(:name) %></td>
-          <td class="table-dark"><%= t(:total_no_of_predictions) %></td>
-          <td class="table-dark"><%= t(:no_of_calculated_predictions) %></td>
-          <td class="table-dark"><%= t(:score) %></td>
+          <td class="table-dark no-of"><%= t(:total_no_of_predictions) %></td>
+          <td class="table-dark no-of"><%= t(:no_of_calculated_predictions) %></td>
+          <td class="table-dark no-col"><%= t(:score) %></td>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +19,9 @@
             <tr class="table-dark">
               <td class="table-dark"><%= position + 1 %></td>
               <td class="table-dark"><%= user.full_name %></td>
-              <td class="table-dark"><%= user.user_predictions.count %></td>
-              <td class="table-dark"><%= user.user_predictions.calculated_predictions.count %></td>
-              <td class="table-dark"><%= user.total_point.to_i %></td>
+              <td class="table-dark no-of"><%= user.user_predictions.count %></td>
+              <td class="table-dark no-of"><%= user.user_predictions.calculated_predictions.count %></td>
+              <td class="table-dark no-col"><%= user.total_point.to_i %></td>
             </tr>
           <% end %>
         <% else %>

@@ -8,24 +8,33 @@
     <div class="accordion-body">
       <ul class="nav justify-content-center">
         <li class="nav-item">
-          <%= link_to t(:edit_phase), edit_phase_setting_path(id: phase.id),
+          <%= link_to t(:matches), phase_path(id: phase.id), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t(:edit_phase), edit_phase_path(id: phase.id),
               remote: true, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to t(:add_match), create_match_setting_path(id: phase.id),
-              remote: true, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to t(:delete_phase), delete_phase_setting_path(id: phase.id),
+          <%= link_to t(:delete_phase), phase_path(id: phase.id),
               method: :delete, remote: true, data: {confirm: "Are you sure ?"}, 
               class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to t(:confirm), confirm_phase_setting_path(id: phase.id),
-              remote: true, data: {confirm: "Are you sure ?"}, class: "nav-link" %>
+          <%= link_to (phase.setup_completed? ? t(:unconfirm) : t(:confirm)),
+              confirm_phase_phase_path(id: phase.id), remote: true,
+              data: {confirm: "Are you sure ?"}, class: "nav-link" %>
         </li>
         <li class="nav-item"></li>
       </ul>
+      <div class="album">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="accordionMatches">
+            <% phase.matches.each do |match| %>
+              <%= render partial: "prediction/matches/match", locals: {match: match, mode: true} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

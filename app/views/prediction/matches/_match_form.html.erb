@@ -1,0 +1,49 @@
+<%= form_for match, remote: true, class: "row g-3 needs-validation" do |f| %>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= match.id.nil? ? t(:new_match) : t(:edit_match) %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="$('#form-modal').hide()"></button>
+      </div>
+      <div class="modal-body" id="validation-errors">
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-3 row">
+              <label for="inputHomematch" class="col-sm-5 col-form-label"><%= t(:home_team) %></label>
+              <div class="col-sm-7">
+                <%= f.select :home_team_id, @teams.collect {|t| [t.full_name, t.id] },
+                    {prompt: "Select home team"}, class: "form-control",
+                    id: "inputHomematch", required: true %>
+              </div>
+            </div>
+            
+            <div class="mb-3 row">
+              <label for="inputAwaymatch" class="col-sm-5 col-form-label"><%= t(:away_team) %></label>
+              <div class="col-sm-7">
+                <%= f.select :away_team_id, @teams.collect {|t| [t.full_name, t.id] },
+                    {prompt: "Select away team"}, class: "form-control",
+                    id: "inputAwaymatch", required: true %>
+              </div>
+            </div>
+            
+            <div class="mb-3 row" id="matchTime">
+              <label for="inputMatchtime" class="col-sm-5 col-form-label"><%= t(:match_time) %></label>
+              <div class="col-sm-7">
+                <%= f.datetime_select :match_time, ampm: true, class: "form-control",
+                    id: "inputMatchtime", required: true %>
+              </div>
+            </div>
+            <%= f.hidden_field :phase_id %>
+            <%= f.hidden_field :competetion_id %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <% button_name = (match.id.nil? ? :create : :save) %>
+        <%= f.submit t(button_name), class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,5 +1,6 @@
 module Prediction
   class User < ApplicationRecord
+    default_scope -> { where(is_active: true, is_deleted: false) } 
     attr_accessor :password
     has_many :user_predictions, dependent: :destroy
     validates_presence_of :full_name
@@ -10,6 +11,7 @@ module Prediction
     validates_presence_of :password, if: Proc.new{|u| (!u.hashed_password.present? || !u.password_salt.present?)}
     before_save :hash_password, if: Proc.new{|u| u.password.present?}
     scope :active, -> { where(is_active: true) }
+    scope :not_deleted, -> { unscoped.where(is_deleted: false)}
     scope :players, -> { where(is_admin: false) }
     scope :login_requested, -> { where("is_active = FALSE AND request_token IS NOT NULL") }
     

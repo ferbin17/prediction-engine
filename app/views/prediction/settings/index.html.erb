@@ -2,17 +2,19 @@
   <div class="accordion" id="accordionCompetetion">
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <%= link_to t(:add_competetion), create_competetion_settings_path, remote: true, class: "nav-link" %>
+        <%= link_to t(:add_competetion), new_competetion_path, remote: true, class: "nav-link" %>
       </li>
       <li class="nav-item">
         <%= link_to t(:player_login_request), users_path, class: "nav-link" %>
       </li>
-      <li class="nav-item">
-        <%= link_to t(:login_request_approval), approval_users_path, class: "nav-link" %>
-      </li>
+      <% if @login_request_count > 0 %>
+        <li class="nav-item">
+          <%= link_to t(:login_request_approval), approval_users_path, class: "nav-link" %>
+        </li>
+      <% end %>
     </ul>
     <% @competetions.each do |competetion| %>
-      <%= render partial: "competetion", locals: {competetion: competetion} %>
+      <%= render partial: "prediction/competetions/competetion", locals: {competetion: competetion} %>
     <% end %>
   </div>
 </div>

@@ -86,7 +86,7 @@
   width: 1.5rem;
   text-align: center;
   color: #333;
-  font-size: 13px;
+  font-size: 0.75rem;
   font-family: "Trebuchet MS", Helvetica, sans-serif !important;
   line-height: 1.7;
   -webkit-transform: translateX(-100%);
@@ -141,4 +141,51 @@
 
 .match-form{
   text-align: center;
+}
+
+.no-col{
+  text-align: center;
+}
+
+@media only screen and (max-width: 991px) {
+  .card{
+    font-size: 1rem;
+  }
+  
+  .quantity input{
+    width: 1.5rem;
+  }
+  
+  .team{
+    font-size: 1rem;
+    white-space: break-spaces;
+  }
+  
+  .match-form .team{
+    white-space: inherit;
+  }
+  
+  h5, .h5{
+    font-size: 1rem;
+  }
+  
+  .match-form .quantity input{
+    width: 1.5rem;
+  }
+  
+  .quantity{
+    width: 49%;
+  }
+  
+  .seperator{
+    width: 2%;
+  }
+  
+  .team-name-long{
+    display: none;
+  }
+  
+  .no-of{
+    display: none;
+  }
 }

@@ -1,0 +1,5 @@
+<% if @match && @match.is_deleted %>
+  $(`#match-<%= @match.id %>-user-<%= @current_user.id %>`).remove();
+<% else %>
+  $('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);
+<% end %>

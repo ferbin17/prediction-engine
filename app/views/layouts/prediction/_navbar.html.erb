@@ -10,20 +10,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <% if @current_user %>
-          <% unless @current_user.is_admin? %>
-            <li class="nav-item">
-              <%= link_to t(:predict), root_path, class: "nav-link #{active_tab(params, "predict")}" %>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "table")}" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to t(:rules), rules_predictions_path, class: "nav-link #{active_tab(params, "rules")}" %>
-          </li>
           <% if @current_user.is_admin? %>
             <li class="nav-item">
+              <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "table")}" %>
+            </li>
+            <li class="nav-item">
               <%= link_to t(:settings), settings_path, class: "nav-link #{active_tab(params, "settings")}" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to t(:predict), root_path, class: "nav-link #{active_tab(params, "predict")}" %>
+            </li>            
+            <li class="nav-item">
+              <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "table")}" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to t(:rules), rules_predictions_path, class: "nav-link #{active_tab(params, "rules")}" %>
             </li>
           <% end %>
 

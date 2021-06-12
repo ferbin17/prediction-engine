@@ -1,0 +1,7 @@
+<% if @competetion.present? %>
+  $('#form-modal').html(`<%= render partial: "competetion_form",
+    locals: {competetion: @competetion} %>`);
+  $('#form-modal').show();
+<% else %>
+  $('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);
+<% end %>
