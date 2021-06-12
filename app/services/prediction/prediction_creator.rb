@@ -10,7 +10,7 @@ module Prediction
     def call
       match = Match.find_by_id(@prediction_params[:match_id])
       prediction = @user.user_predictions.find_or_create_by(match_id: match.id)
-      unless prediction.update(@prediction_params)
+      unless prediction.update(@prediction_params.merge(prediction_updated_at: Time.now))
         return prediction.errors.full_messages
       end
       return []
