@@ -30,7 +30,7 @@ module Prediction
     # Point table
     def table
       @users = User.players.left_joins(:user_predictions).select(:id, :full_name, :total_point).
-          group(:id).order('total_point DESC, COUNT(prediction_user_predictions.id) ASC').includes(:user_predictions)
+          group(:id).order('total_point DESC, COUNT(prediction_user_predictions.id) DESC').includes(:user_predictions)
     end
     
     # Shows rules
