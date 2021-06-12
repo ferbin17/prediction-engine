@@ -83,7 +83,7 @@ module Prediction
         @user = User.not_deleted.players.login_requested.find_by_request_token(player_approval_params[:request_token])
         if @user
           if player_approval_params[:approval]
-            if @user.update(request_token: nil) && @user.toggle_active_status
+            if @user.update(request_token: nil, first_login: false) && @user.toggle_active_status
               flash[:success] = t(:player_login_approved)
               redirect_to approval_users_path
             else

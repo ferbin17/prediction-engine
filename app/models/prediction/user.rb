@@ -45,6 +45,14 @@ module Prediction
       UserCreator.call(name, username, phone)
     end
     
+    # Create admin account
+    def self.create_admin
+      unless User.exists?(username: "admin")
+        Prediction::User.create(full_name: "Admin", username: "admin",
+          password: "admin", phone_no: "9745028467", is_admin: true)
+      end
+    end
+    
     # Update default password if new password matches else returns false
     def update_default_password(pass_params)
       if pass_params[:new_password] == pass_params[:confirm_password]
