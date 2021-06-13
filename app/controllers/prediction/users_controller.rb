@@ -97,6 +97,7 @@ module Prediction
         flash[:success] = t(:request_token_generated, token: cookies.encrypted[:request_token])
         redirect_to root_path
       else
+        render action: :new
         @errors = @user.errors.full_messages
       end
     end

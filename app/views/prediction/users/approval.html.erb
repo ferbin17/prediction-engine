@@ -1,31 +1,33 @@
-<main class="form-signin text-center">
-  <%= form_for :user, class: "row g-3" do |f| %>
-    <h1 class="h3 mb-3 fw-normal"> <%= t(:login_request_approval) %></h1>
-    
-    <% if @user.present? %>
-      <div class="form-floating">
-        <%= f.text_field :full_name, class: "form-control", id: "inputFullname", placeholder: t(:full_name), autocomplete: "off", required: true %>
-        <label><%= t(:full_name) %></label>
-      </div>
+<div class="container inner-container">
+  <main class="form-signin text-center">
+    <%= form_for :user, class: "row g-3" do |f| %>
+      <h1 class="h3 mb-3 fw-normal"> <%= t(:login_request_approval) %></h1>
       
-      <div class="form-floating">
-        <%= f.text_field :username, class: "form-control", id: "inputUsername", placeholder: t(:username), disabled: true, readonly: true %>
-        <label for="inputUsername"><%= t(:username) %></label>
-      </div>
-      
-      <div class="form-floating">
-        <%= f.text_field :phone_no, class: "form-control number_field", id: "inputPhoneno", placeholder: t(:phone_no), required: true %>
-        <label for="inputPhoneno"><%= t(:phone_no) %></label>
-      </div>
-      <%= f.hidden_field :request_token %>
-      <%= f.hidden_field :approval, value: true %>
-    <% else %>
-      <div class="form-floating">
-        <%= f.text_field :request_token, class: "form-control", id: "inputRequesttoken", placeholder: t(:request_token), autocomplete: "off", required: true %>
-        <label for="inputRequesttoken"><%= t(:request_token) %></label>
-      </div>
-    <% end %>
+      <% if @user.present? %>
+        <div class="form-floating">
+          <%= f.text_field :full_name, class: "form-control", id: "inputFullname", placeholder: t(:full_name), autocomplete: "off", required: true %>
+          <label><%= t(:full_name) %></label>
+        </div>
+        
+        <div class="form-floating">
+          <%= f.text_field :username, class: "form-control", id: "inputUsername", placeholder: t(:username), disabled: true, readonly: true %>
+          <label for="inputUsername"><%= t(:username) %></label>
+        </div>
+        
+        <div class="form-floating">
+          <%= f.text_field :phone_no, class: "form-control number_field", id: "inputPhoneno", placeholder: t(:phone_no), required: true %>
+          <label for="inputPhoneno"><%= t(:phone_no) %></label>
+        </div>
+        <%= f.hidden_field :request_token %>
+        <%= f.hidden_field :approval, value: true %>
+      <% else %>
+        <div class="form-floating">
+          <%= f.text_field :request_token, class: "form-control", id: "inputRequesttoken", placeholder: t(:request_token), autocomplete: "off", required: true %>
+          <label for="inputRequesttoken"><%= t(:request_token) %></label>
+        </div>
+      <% end %>
 
-    <button class="w-100 btn btn-lg btn-primary" type="submit"><%= (@user ? t(:approve) : t(:submit)) %></button>
-  <% end %>
-</main>
+      <button class="w-100 btn btn-lg btn-primary" type="submit"><%= (@user ? t(:approve) : t(:submit)) %></button>
+    <% end %>
+  </main>
+</div>

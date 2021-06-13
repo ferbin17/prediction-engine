@@ -11,3 +11,7 @@
 #matchTime .col-sm-7:nth-child(4){
   display: none;
 }
+
+.match-settings-card .match-banner{
+  text-align: center;
+}

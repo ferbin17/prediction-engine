@@ -18,6 +18,10 @@ en:
               home_and_away_same: "Home team and away team can't be same"
             match_time:
               invalid_date_time: "Invalid date"
+            match_ended:
+              match_cant_be_ended_before_match_time: "Match can't be ended before Match time"
+            home_team_score:
+              cant_submit_score_before_match_is_finished: "Score can't submit score before the match is finished"
         prediction/user:
           attributes:
             base:
@@ -49,6 +53,7 @@ en:
   status: "Status"
   back: "Back"
   following_errors_encountered: "Following errors encountered"
+  are_you_sure: "Are you sure ?"
 
   # User
   users: "Users"
@@ -135,6 +140,16 @@ en:
   mark_as_match_ended: "Mark as Match Ended"
   submit_match_score: "Submit Match Score"
   calculate_prediction_score: "Calculate Prediction Score"
+  match_date: "Match date"
+  match_ended: "Match ended"
+  score_submitted: "Score submitted"
+  match_marked_as_ended: "Match marked as ended"
+  home_team_score: "Home team score"
+  away_team_score: "Away team score"
+  score_submitted: "Match score submitted successfully"
+  edit_score_submission: "Edit score submiision"
+  prediction_score_calculated: "Predicton scores calculated"
+  match_score: "Match score"
   
   # User Prediction
   predictions: "Predictions"
@@ -148,6 +163,7 @@ en:
   point_table: "Point table"
   total_no_of_predictions: "Total no. of predictions"
   no_of_calculated_predictions: "Total no. of calculated predictions"
+  your_score: "Your score"
   
   # settings
   settings: "Settings"

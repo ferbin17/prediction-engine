@@ -1,0 +1,21 @@
+<% if @match.present? %>
+  <% if request.patch? %>
+    <% if @errors.present? %>
+      $('#validation-errors').html(`<%= render partial: "layouts/prediction/error_messages",
+        locals: {errors: @errors} %>`);
+      $('#validation-errors').show();
+    <% else %>
+      $('#validation-errors').hide();
+      $('#form-modal').hide();
+      $(`#match-<%= @match.id %>-user-<%= @current_user.id %>`).replaceWith( `<%= render partial: "match",
+        locals: {match: @match, process_mode: true} %>`);
+      $('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);
+    <% end %>
+  <% else %>
+    $('#form-modal').html(`<%= render partial: "match_score_form",
+      locals: {match: @match} %>`);
+    $('#form-modal').show();
+  <% end %>
+<% else %>
+  $('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);
+<% end %>

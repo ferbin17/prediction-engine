@@ -13,7 +13,7 @@ module Prediction
     scope :uncalculated_predictions, -> { where(point_calculated: false) }
     
     # Calcular score of user prediction
-    def calculat_score
+    def calculate_score
       return false unless match.match_ended
       home = (match.home_team_score == home_team_score)
       away = (match.away_team_score == away_team_score)

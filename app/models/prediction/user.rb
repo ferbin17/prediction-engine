@@ -40,7 +40,7 @@ module Prediction
     # Update user total score
     def update_total_score
       sum = user_predictions.calculated_predictions.pluck(:score).sum
-      update(total_score: sum)
+      update(total_point: sum)
     end
     
     # Update default password if new password matches else returns false

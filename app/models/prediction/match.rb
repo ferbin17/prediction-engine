@@ -9,6 +9,7 @@ module Prediction
     validates_presence_of :match_time
     validates :home_team_score, :away_team_score, numericality: { only_integer: true }, if: Proc.new{|m| (m.home_team_score || m.away_team_score)}
     validate :same_teams, if: Proc.new{|m| m.home_team && m.away_team}
+    validate :validate_match_ended_value, if: Proc.new{|m| m.match_ended_changed? && m.match_ended}
     after_save :update_phase_status, if: Proc.new{|m| m.match_ended_changed?}
     after_save :update_competetion_dates, if: Proc.new{|m| m.match_time_changed?}
     after_save :update_phase_dates, if: Proc.new{|m| m.match_time_changed?}
@@ -35,11 +36,30 @@ module Prediction
     
     # Calculate predictions of a match
     def calculate_scores_for_predictions
-      return false unless match.match_ended
+      return false unless match_ended && score_submitted
       predictions = user_predictions.uncalculated_predictions
       predictions.each do |prediction|
-        predictions.calculat_score
+        prediction.calculate_score
       end
+      self.update(score_calculated: true)
+    end
+    
+    # Mark match as ended
+    def end_match
+      self.update(match_ended: true)
+    end
+    
+    # Submit the score of a match
+    def submit_score(home_score, away_score)
+      if match_ended
+        if self.update(home_team_score: home_score, away_team_score: away_score, score_submitted: true)
+          update_score_calculated_status
+          return true
+        end
+      else
+        errors.add(:home_team_score, :cant_submit_score_before_match_is_finished)
+      end
+      return false
     end
     
     private
@@ -73,6 +93,18 @@ module Prediction
         first_match_time = phase.matches.order(:match_time).limit(1).pluck(:match_time).first
         last_match_time = phase.matches.order(match_time: :desc).limit(1).pluck(:match_time).first
         competetion.update(start_datetime: first_match_time, end_datetime: last_match_time)
+      end
+      
+      # Check if match can be ended
+      def validate_match_ended_value
+        unless match_time <= (Time.now + 90.minutes)
+          errors.add(:match_ended, :match_cant_be_ended_before_match_time)
+        end
+      end
+      
+      # Update score caculated status incase of score resubmission
+      def update_score_calculated_status
+        self.update(score_calculated: false)
       end
   end
 end

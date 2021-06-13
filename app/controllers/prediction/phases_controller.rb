@@ -17,6 +17,7 @@ module Prediction
     def create
       @phase = @competetion.phases.build(phase_params)
       if @competetion.save
+        @phase.update(is_active: false)
         flash.now[:success] = t(:phase_created)
       else
         @errors = @phase.errors.instance_variable_get("@errors")
@@ -43,15 +44,15 @@ module Prediction
     
     # Change active status
     def confirm_phase
-      if @phase.update(setup_completed: !@phase.setup_completed)
-        action = t((@phase.setup_completed ? 'activate' : 'deactivate'))
+      if @phase.update(is_active: !@phase.is_active)
+        action = t((@phase.is_active ? 'activate' : 'deactivate'))
         flash.now[:success] = t(:phase_changed, action:  action)
       end
     end
     
     # Shows matches of the phase
     def show
-      @matches = @phase.matches
+      @matches = @phase.matches.includes(:home_team, :away_team)
     end
     
     private

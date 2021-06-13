@@ -1,5 +1,5 @@
 <% if @match %>
   $(`#match-<%= @match.id %>-user-<%= @current_user.id %>`).replaceWith( `<%= render partial: "match",
-      locals: {match: @match, mode: true} %>`);
+      locals: {match: @match, process_mode: true} %>`);
 <% end %>
 $('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);

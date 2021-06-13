@@ -16,12 +16,12 @@
         </li>
         <li class="nav-item">
           <%= link_to t(:delete_competetion), competetion_path(id: competetion.id),
-              method: :delete, remote: true, data: {confirm: "Are you sure ?"}, class: "nav-link" %>
+              method: :delete, remote: true, data: {confirm: t(:are_you_sure)}, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to (competetion.is_active ? t(:deactivate) : t(:activate)),
-              change_competetion_status_competetion_path(id: competetion.id),
-              remote: true, data: {confirm: "Are you sure ?"}, class: "nav-link" %>
+              confirm_competetion_competetion_path(id: competetion.id),
+              remote: true, data: {confirm: t(:are_you_sure)}, class: "nav-link" %>
         </li>
       </ul>
       <div class="accordion" id="accordionPhases">

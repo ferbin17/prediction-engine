@@ -36,7 +36,7 @@ Prediction::Engine.routes.draw do
   
   resources :competetions, except: [:index] do
     member do
-      get 'change_competetion_status'
+      get 'confirm_competetion'
     end
   end
   
@@ -49,6 +49,10 @@ Prediction::Engine.routes.draw do
   resources :matches, except: [:index, :show] do
     member do
       get 'confirm_match'
+      get 'end_match'
+      get 'submit_score'
+      patch 'submit_score'
+      get 'calculate_score'
     end
   end
   

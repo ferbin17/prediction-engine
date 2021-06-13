@@ -1,27 +1,42 @@
-<div class="col" id="match-<%= match.id %>-user-<%= @current_user.id %>">
+<div class="col match-settings-card" id="match-<%= match.id %>-user-<%= @current_user.id %>">
   <div class="card shadow-sm">
     <div class="card-body">
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <div class="card-text">
+        <h4 class="match-banner"><%= match.home_team.short_name %> vs <%= match.away_team.short_name %></h4>
+        <h6><strong><%= t(:home_team) %>: </strong><%= match.home_team.full_name %></h6>
+        <h6><strong><%= t(:away_team) %>: </strong><%= match.away_team.full_name %></h6>
+        <h6><strong><%= t(:match_date) %>: </strong><%= format_time(match.match_time, :date) %></h6>
+        <h6><strong><%= t(:match_time) %>: </strong><%= format_time(match.match_time, :time) %></h6>
+        <h6><strong><%= t(:match_ended) %>: </strong><%= match.match_ended? ? "Y" : "N" %></h6>
+        <% if match.match_ended? %>
+          <h6><strong><%= t(:score_submitted) %>: </strong><%= match.score_submitted? ? "Y" : "N" %></h6>
+        <% end %>
+        <% if match.score_submitted? %>
+          <h6><strong><%= t(:score) %>: </strong><%= "#{match.home_team_score} - #{match.away_team_score}" %></h6>
+        <% end %>
+      </div>
+      
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
-          <% if mode %>
-            <%= link_to t(:mark_as_match_ended), edit_match_path(id: match.id),
-                remote: true, data: {confirm: "Are you sure ?"},
-                class: "btn btn-sm btn-outline-secondary" %>
-            <%= link_to t(:submit_match_score), edit_match_path(id: match.id),
-                remote: true, class: "btn btn-sm btn-outline-secondary" %>
-            <%= link_to t(:calculate_prediction_score), edit_match_path(id: match.id),
-                remote: true, data: {confirm: "Are you sure ?"},
-                class: "btn btn-sm btn-outline-secondary" %>
+          <% if process_mode %>
+            <%= link_to t(:mark_as_match_ended), end_match_match_path(match),
+                remote: true, data: {confirm: t(:are_you_sure)},
+                class: "btn btn-sm btn-outline-secondary" unless match.match_ended %>
+            <%= link_to t((match.score_submitted ? 'edit_score_submission' : 'submit_match_score')),
+                submit_score_match_path(match), remote: true,
+                class: "btn btn-sm btn-outline-secondary" if match.match_ended %>
+            <%= link_to t(:calculate_prediction_score), calculate_score_match_path(match),
+                remote: true, data: {confirm: t(:are_you_sure)},
+                class: "btn btn-sm btn-outline-secondary" if match.score_submitted && !match.score_calculated %>
           <% else %>
-            <%= link_to t(:edit_match), edit_match_path(id: match.id),
+            <%= link_to t(:edit_match), edit_match_path(match),
                 remote: true, class: "btn btn-sm btn-outline-secondary" %>
-            <%= link_to t(:delete_match), match_path(id: match.id),
-                method: :delete, remote: true, data: {confirm: "Are you sure ?"}, 
+            <%= link_to t(:delete_match), match_path(match),
+                method: :delete, remote: true, data: {confirm: t(:are_you_sure)}, 
                 class: "btn btn-sm btn-outline-secondary" %>
             <%= link_to "#{(match.is_active? ? t(:unconfirm) : t(:confirm))} #{t(:match)}",
-                confirm_match_match_path(id: match.id), remote: true,
-                data: {confirm: "Are you sure ?"},
+                confirm_match_match_path(match), remote: true,
+                data: {confirm: t(:are_you_sure)},
                 class: "btn btn-sm btn-outline-secondary" %>
           <% end %>
         </div>

@@ -47,7 +47,10 @@ module Prediction
           @competetion = Competetion.first
           @phase = @competetion.phases.current_phase.try(:first)
         end
-        @matches = @phase.matches.order(:match_time).includes(:home_team, :away_team, :user_predictions) if @phase
+        if @phase
+          @matches = @phase.matches.order(:match_time).includes(:home_team, :away_team, :user_predictions)
+          @count = UserPrediction.where(match_id: @matches.pluck(:id)).group(:match_id).count(:id)
+        end
       end
       
       # User prediction parameters

@@ -12,10 +12,10 @@
                   <%= link_to t(:edit_details), edit_user_path(id: @user.id),
                       class: "btn btn-sm btn-outline-secondary" %>
                   <%= link_to t(:reset_password), reset_password_user_path(id: @user.id),
-                      data: {confirm: "Are you sure ?"},
+                      data: {confirm: t(:are_you_sure)},
                       class: "btn btn-sm btn-outline-secondary" %>
                   <%= link_to t(:delete_user), user_path(id: @user.id),
-                      method: :delete, data: {confirm: "Are you sure ?"},
+                      method: :delete, data: {confirm: t(:are_you_sure)},
                       class: "btn btn-sm btn-outline-secondary" %>
                 </div>
               </div>

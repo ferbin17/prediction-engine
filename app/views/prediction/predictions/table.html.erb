@@ -1,35 +1,37 @@
-<div class="card">
-  <div class="card-header">
-    <%= t(:point_table) %>
-  </div>
-  <div class="card-body">
-    <table class="table table-dark table-hover">
-      <thead>
-        <tr class="table-dark">
-          <td class="table-dark"><%= t(:position) %></td>
-          <td class="table-dark"><%= t(:name) %></td>
-          <td class="table-dark no-of"><%= t(:total_no_of_predictions) %></td>
-          <td class="table-dark no-of"><%= t(:no_of_calculated_predictions) %></td>
-          <td class="table-dark no-col"><%= t(:score) %></td>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @users.present? %>
-          <% @users.each_with_index do |user, position| %>
+<div class="container inner-container">
+  <div class="card">
+    <div class="card-header">
+      <%= t(:point_table) %>
+    </div>
+    <div class="card-body">
+      <table class="table table-dark table-hover">
+        <thead>
+          <tr class="table-dark">
+            <td class="table-dark"><%= t(:position) %></td>
+            <td class="table-dark"><%= t(:name) %></td>
+            <td class="table-dark no-of"><%= t(:total_no_of_predictions) %></td>
+            <td class="table-dark no-of"><%= t(:no_of_calculated_predictions) %></td>
+            <td class="table-dark no-col"><%= t(:score) %></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @users.present? %>
+            <% @users.each_with_index do |user, position| %>
+              <tr class="table-dark">
+                <td class="table-dark"><%= position + 1 %></td>
+                <td class="table-dark"><%= user.full_name %></td>
+                <td class="table-dark no-of"><%= user.user_predictions.count %></td>
+                <td class="table-dark no-of"><%= user.user_predictions.calculated_predictions.count %></td>
+                <td class="table-dark no-col"><%= user.total_point.to_i %></td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr class="table-dark">
-              <td class="table-dark"><%= position + 1 %></td>
-              <td class="table-dark"><%= user.full_name %></td>
-              <td class="table-dark no-of"><%= user.user_predictions.count %></td>
-              <td class="table-dark no-of"><%= user.user_predictions.calculated_predictions.count %></td>
-              <td class="table-dark no-col"><%= user.total_point.to_i %></td>
+              <td class="table-dark no-item-message" colspan="5"><%= t(:no_players_registered_yet) %></td>
             </tr>
           <% end %>
-        <% else %>
-          <tr class="table-dark">
-            <td class="table-dark no-item-message" colspan="5"><%= t(:no_players_registered_yet) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

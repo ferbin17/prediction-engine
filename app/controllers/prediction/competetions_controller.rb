@@ -4,7 +4,7 @@ module Prediction
   class CompetetionsController < ApplicationController
     before_action :check_admin_permission
     before_action :find_competetion, only: [:edit, :update, :destroy, :show, 
-      :change_competetion_status]
+      :confirm_competetion]
     
     # Competetion creation popup
     def new
@@ -15,6 +15,7 @@ module Prediction
     def create
       @competetion = Competetion.new(competetion_params.merge({is_active: false}))
       if @competetion.save
+        @competetion.update(is_active: false)
         flash.now[:success] = t(:competetion_created)
       else
         @errors = @competetion.errors.instance_variable_get("@errors")
@@ -40,7 +41,7 @@ module Prediction
     end
     
     # Changes the current active status of competetion
-    def change_competetion_status
+    def confirm_competetion
       if @competetion.update(is_active: !@competetion.is_active)
         action = t((@competetion.is_active ? 'activate' : 'deactivate'))
         flash.now[:success] = t(:competetion_changed, action:  action)
@@ -49,7 +50,7 @@ module Prediction
     
     # Show the phases of competetion
     def show
-      @phases = @competetion.phases.includes(:matches)
+      @phases = @competetion.phases.includes(matches: [:home_team, :away_team])
     end
     
     private

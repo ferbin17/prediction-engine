@@ -75,13 +75,13 @@ body{
   display: contents;
 }
   
-.btn-sm, .btn-group-sm > .btn{
+.table .btn-sm, .table .btn-group-sm > .btn{
   padding: 1rem;
   font-size: 1rem;
 }
 
 .actions-td{
-  width: 35%;
+  width: 40%;
 }
 
 .actions-td .btn-sm, .actions-td .btn-group-sm > .btn,

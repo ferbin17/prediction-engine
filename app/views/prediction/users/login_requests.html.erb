@@ -1,46 +1,48 @@
-<div class="card">
-  <div class="card-header">
-    <div class="table-card-header"><%= t(:player_login_request) %></div>
-    <div class="table-card-actions">
-      <%= link_to t(:login_request_approval), approval_users_path, class: "nav-link" if @users.present? %>
+<div class="container inner-container">
+  <div class="card">
+    <div class="card-header">
+      <div class="table-card-header"><%= t(:player_login_request) %></div>
+      <div class="table-card-actions">
+        <%= link_to t(:login_request_approval), approval_users_path, class: "nav-link" if @users.present? %>
+      </div>
     </div>
-  </div>
-  <div class="card-body">
-    <table class="table table-dark table-hover">
-      <thead>
-        <tr class="table-dark">
-          <td class="table-dark">#</td>
-          <td class="table-dark"><%= t(:name) %></td>
-          <td class="table-dark"><%= t(:username) %></td>
-          <td class="table-dark"><%= t(:phone_no) %></td>
-          <td class="table-dark"><%= t(:request_token) %></td>
-          <td class="table-dark"><%= t(:actions) %></td>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @users.present? %>
-          <% @users.each_with_index do |user, position| %>
+    <div class="card-body">
+      <table class="table table-dark table-hover">
+        <thead>
+          <tr class="table-dark">
+            <td class="table-dark">#</td>
+            <td class="table-dark"><%= t(:name) %></td>
+            <td class="table-dark"><%= t(:username) %></td>
+            <td class="table-dark"><%= t(:phone_no) %></td>
+            <td class="table-dark"><%= t(:request_token) %></td>
+            <td class="table-dark"><%= t(:actions) %></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @users.present? %>
+            <% @users.each_with_index do |user, position| %>
+              <tr class="table-dark">
+                <td class="table-dark"><%= position + 1 %></td>
+                <td class="table-dark"><%= user.full_name %></td>
+                <td class="table-dark"><%= user.username %></td>
+                <td class="table-dark"><%= user.phone_no %></td>
+                <td class="table-dark"><%= user.request_token %></td>
+                <td class="table-dark">
+                  <%= link_to t(:delete_user), user_path(id: user.id),
+                      method: :delete, data: {confirm: t(:are_you_sure)},
+                      class: "btn btn-sm btn-outline-secondary" %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
             <tr class="table-dark">
-              <td class="table-dark"><%= position + 1 %></td>
-              <td class="table-dark"><%= user.full_name %></td>
-              <td class="table-dark"><%= user.username %></td>
-              <td class="table-dark"><%= user.phone_no %></td>
-              <td class="table-dark"><%= user.request_token %></td>
-              <td class="table-dark">
-                <%= link_to t(:delete_user), user_path(id: user.id),
-                    method: :delete, data: {confirm: "Are you sure ?"},
-                    class: "btn btn-sm btn-outline-secondary" %>
+              <td class="table-dark no-item-message" colspan="6">
+                <%= t(:no_players_request_left) %>
               </td>
             </tr>
           <% end %>
-        <% else %>
-          <tr class="table-dark">
-            <td class="table-dark no-item-message" colspan="6">
-              <%= t(:no_players_request_left) %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

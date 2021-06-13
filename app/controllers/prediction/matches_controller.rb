@@ -2,8 +2,10 @@ require_dependency "prediction/application_controller"
 
 module Prediction
   class MatchesController < ApplicationController
+    before_action :check_admin_permission
     before_action :find_phase, only: [:new, :create]
     before_action :find_match, only: [:edit, :update, :destroy, :confirm_match]
+    before_action :find_active_match, only: [:end_match, :submit_score, :calculate_score]
     
     # New match popup
     def new
@@ -16,6 +18,7 @@ module Prediction
     def create
       @match = @phase.matches.build(match_params)
       if validate_date && @phase.save
+        @match.update(is_active: false)
         flash.now[:success] = t(:match_created)
       else
         @errors = @match.errors.instance_variable_get("@errors")
@@ -52,15 +55,33 @@ module Prediction
     end
     
     # Marks the match as finished
-    def mark_as_finished
+    def end_match
+      if @match.end_match
+        flash[:success] = t(:match_marked_as_ended)
+      else
+        @errors = @match.errors.full_messages
+        @match.reload
+      end
     end
     
     # Submits the match score
-    def submit_match_score
+    def submit_score
+      if request.patch?
+        if @match.submit_score(match_params[:home_team_score], match_params[:away_team_score])
+          flash[:success] = t(:score_submitted)
+        else
+          @errors = @match.errors
+        end
+      end
     end
     
     # calculate prediction score for a match
-    def calculate_match_score
+    def calculate_score
+      if @match.calculate_scores_for_predictions
+        flash[:success] = t(:prediction_score_calculated)
+      else
+        @errors = @match.errors
+      end
     end
     
     private
@@ -82,6 +103,15 @@ module Prediction
       # Finds match from parameters
       def find_match
         @match = Match.not_deleted.find_by_id(params[:id])
+        unless @match
+          flash.now[:danger] = t(:match_not_found)
+          render head: :ok
+        end
+      end
+      
+      # Finds active match from parameters
+      def find_active_match
+        @match = Match.find_by_id(params[:id])
         unless @match
           flash.now[:danger] = t(:match_not_found)
           render head: :ok

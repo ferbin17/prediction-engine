@@ -24,6 +24,6 @@
   </div>
   <div class="card-footer text-muted">
     <%= t(:deadline) %>: <strong><%= "#{format_time(match.deadline, :datetime)}" %></strong><br>
-    <%= t(:friends_predicted, count: match.user_predictions.count) %>
+    <%= t(:friends_predicted, count: @count.dig(match.id).to_i) %>
   </div>
 </div>

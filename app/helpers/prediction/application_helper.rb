@@ -5,6 +5,10 @@ module Prediction
       case format
       when :datetime
         time.in_time_zone("Chennai").strftime("%d-%m-%Y %I:%M %p")
+      when :date
+        time.in_time_zone("Chennai").strftime("%d-%m-%Y")
+      when :time
+        time.in_time_zone("Chennai").strftime("%I:%M %p")
       else
         time.in_time_zone("Chennai")
       end

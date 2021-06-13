@@ -18,7 +18,14 @@
     </div>
   </div>
   <div class="card-footer text-muted">
-    <%= t(:deadline) %>: <strong><%= "#{format_time(match.deadline, :datetime)}" %></strong><br>
-    <%= t(:friends_predicted, count: match.user_predictions.count) %>
+    <% if match.match_ended? && match.score_submitted? %>
+      <%= t(:match_score) %>: <strong><%= "#{match.home_team_score} - #{match.away_team_score}" %></strong><br>
+      <% if match.score_calculated? && prediction.point_calculated? %>
+        <%= t(:your_score) %>: <strong><%= "#{prediction.score}" %></strong><br>
+      <% end %>
+    <% else %>
+      <%= t(:deadline) %>: <strong><%= "#{format_time(match.deadline, :datetime)}" %></strong><br>
+    <% end %>
+    <%= t(:friends_predicted, count: @count.dig(match.id).to_i) %>
   </div>
 </div>

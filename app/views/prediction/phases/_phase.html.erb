@@ -16,13 +16,13 @@
         </li>
         <li class="nav-item">
           <%= link_to t(:delete_phase), phase_path(id: phase.id),
-              method: :delete, remote: true, data: {confirm: "Are you sure ?"}, 
+              method: :delete, remote: true, data: {confirm: t(:are_you_sure)}, 
               class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to (phase.setup_completed? ? t(:unconfirm) : t(:confirm)),
+          <%= link_to (phase.is_active? ? t(:unconfirm) : t(:confirm)),
               confirm_phase_phase_path(id: phase.id), remote: true,
-              data: {confirm: "Are you sure ?"}, class: "nav-link" %>
+              data: {confirm: t(:are_you_sure)}, class: "nav-link" %>
         </li>
         <li class="nav-item"></li>
       </ul>
@@ -30,7 +30,7 @@
         <div class="container">
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="accordionMatches">
             <% phase.matches.each do |match| %>
-              <%= render partial: "prediction/matches/match", locals: {match: match, mode: true} %>
+              <%= render partial: "prediction/matches/match", locals: {match: match, process_mode: true} %>
             <% end %>
           </div>
         </div>

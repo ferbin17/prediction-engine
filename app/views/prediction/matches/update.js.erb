@@ -6,6 +6,6 @@
   $('#validation-errors').hide();
   $('#form-modal').hide();
   $('#accordionCompetetion').append(`<%= render partial: "match",
-    locals: {match: @match, mode: true} %>`);
+    locals: {match: @match, process_mode: true} %>`);
   $('#errors').html(`<%= render partial: "layouts/prediction/errors", locals: {errors: @errors} %>`);
 <% end %>
