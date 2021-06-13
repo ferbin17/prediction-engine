@@ -1,13 +1,19 @@
 Prediction::Engine.routes.draw do
-  resources :users, only: [:index, :new, :create] do
+  resources :users do
     collection do
       get 'login'
       post 'login'
       get 'logout'
-      get 'change_password'
-      post 'change_password'
       get 'approval'
       post 'approval'
+      get 'login_requests'
+    end
+    
+    member do
+      get 'profile'
+      get 'change_password'
+      post 'change_password'
+      get 'reset_password'
     end
   end
   

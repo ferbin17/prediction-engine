@@ -5,7 +5,10 @@
         <%= link_to t(:add_competetion), new_competetion_path, remote: true, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to t(:player_login_request), users_path, class: "nav-link" %>
+        <%= link_to t(:all_users), users_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t(:player_login_request), login_requests_users_path, class: "nav-link" %>
       </li>
       <% if @login_request_count > 0 %>
         <li class="nav-item">

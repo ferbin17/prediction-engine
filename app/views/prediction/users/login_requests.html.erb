@@ -13,8 +13,8 @@
           <td class="table-dark"><%= t(:name) %></td>
           <td class="table-dark"><%= t(:username) %></td>
           <td class="table-dark"><%= t(:phone_no) %></td>
-          <td class="table-dark"><%= t(:status) %></td>
-          <td class="table-dark actions-td"><%= t(:actions) %></td>
+          <td class="table-dark"><%= t(:request_token) %></td>
+          <td class="table-dark"><%= t(:actions) %></td>
         </tr>
       </thead>
       <tbody>
@@ -25,13 +25,8 @@
               <td class="table-dark"><%= user.full_name %></td>
               <td class="table-dark"><%= user.username %></td>
               <td class="table-dark"><%= user.phone_no %></td>
-              <td class="table-dark"><%= t((user.is_active? ? 'active' : 'inactive')) %></td>
-              <td class="table-dark actions-td">
-                <%= link_to t(:user_details), user_path(user.id),
-                    class: "btn btn-sm btn-outline-secondary" %>
-                <%= link_to t(:reset_password), reset_password_user_path(user.id),
-                    data: {confirm: "Are you sure ?"},
-                    class: "btn btn-sm btn-outline-secondary" %>
+              <td class="table-dark"><%= user.request_token %></td>
+              <td class="table-dark">
                 <%= link_to t(:delete_user), user_path(id: user.id),
                     method: :delete, data: {confirm: "Are you sure ?"},
                     class: "btn btn-sm btn-outline-secondary" %>
@@ -40,7 +35,7 @@
           <% end %>
         <% else %>
           <tr class="table-dark">
-            <td class="table-dark no-item-message" colspan="5"><%= t(:no_players_registered_yet) %></td>
+            <td class="table-dark no-item-message" colspan="6"><%= t(:no_players_request_left) %></td>
           </tr>
         <% end %>
       </tbody>

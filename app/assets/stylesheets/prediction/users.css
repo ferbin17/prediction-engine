@@ -27,12 +27,6 @@ body{
   user-select: none;
 }
 
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
 .form-signin {
   width: 100%;
   max-width: 500px;
@@ -71,4 +65,39 @@ body{
 
 .table-card-actions .nav-link{
   padding: 0;
+}
+
+.user-profile-show{
+  background: white;
+}
+
+.btn-group, .btn-group-vertical{
+  display: contents;
+}
+  
+.btn-sm, .btn-group-sm > .btn{
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.actions-td{
+  width: 35%;
+}
+
+.actions-td .btn-sm, .actions-td .btn-group-sm > .btn,
+.table-dark .btn-sm, .table-dark .btn-group-sm > .btn{
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .btn-sm, .btn-group-sm > .btn{
+    padding: 0.25rem;
+  }
 }

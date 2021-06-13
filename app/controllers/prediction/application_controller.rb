@@ -16,7 +16,7 @@ module Prediction
       # Check if the its user's first login
       def check_for_first_login
         if @current_user && @current_user.first_login
-          redirect_to change_password_users_path
+          redirect_to change_password_user_path(@current_user)
         end
       end
 
@@ -34,7 +34,7 @@ module Prediction
       # Fetch current_user_id from JWT if exists
       def current_user_id
         begin
-          # session[:jwt_token] ||= cookies.encrypted[:jwt_token]
+          session[:jwt_token] ||= cookies.encrypted[:jwt_token]
           decoded_array = JWT.decode(session[:jwt_token], hmac_secret, true, {algorithm: 'HS256'})
           payload = decoded_array.first
         rescue #JWT::VerificationError

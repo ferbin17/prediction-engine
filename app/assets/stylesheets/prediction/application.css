@@ -96,22 +96,6 @@ a.disabled-link, a.disabled-link:hover{
   display: none;
 }
 
-@media only screen and (max-width: 991px) {
-  .navbar .container{
-    padding-right: var(--bs-gutter-x, 2rem);
-    padding-left: var(--bs-gutter-x, 2rem);
-    max-width: initial !important;
-  }
-  
-  .dropdown.user-icon-drop{
-    display: none !important;
-  }
-  
-  .logout-sm{
-    display: block !important;
-  }
-}
-
 .no-item-message{
   text-align: center;
 }
@@ -139,4 +123,24 @@ a.disabled-link, a.disabled-link:hover{
 
 .album{
   padding: 1rem 0 !important;
+}
+
+.back-button{
+  margin-right: 2%;
+}
+
+@media only screen and (max-width: 991px) {
+  .navbar .container{
+    padding-right: var(--bs-gutter-x, 2rem);
+    padding-left: var(--bs-gutter-x, 2rem);
+    max-width: initial !important;
+  }
+  
+  .dropdown.user-icon-drop, .back-button{
+    display: none !important;
+  }
+  
+  .logout-sm{
+    display: block !important;
+  }
 }

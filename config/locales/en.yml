@@ -21,6 +21,8 @@ en:
         prediction/user:
           attributes:
             base:
+            username:
+              username_pattern_error: "There must be atleast 3 character before '@' or '_'"
         prediction/user_prediction:
           attributes:
             base:
@@ -44,6 +46,8 @@ en:
   activate: "Activate"
   deactivate: "Deactivate"
   order: "Order"
+  status: "Status"
+  back: "Back"
   following_errors_encountered: "Following errors encountered"
 
   # User
@@ -71,6 +75,18 @@ en:
   login_request_approval: "Login request approval"
   no_player_found_at_request_token: "No player found with the request_token, %{token}"
   player_login_approved: "Player login approved"
+  all_users: "All users"
+  no_players_request_left: "No player login request left"
+  edit_details: "Edit details"
+  change_password: "Change password"
+  user_details_saved: "Player details saved"
+  user_not_found: "Player not found"
+  user_deleted: "Player deleted"
+  reset_password: "Reset password"
+  actions: "Actions"
+  user_details: "User details"
+  delete_user: "Delete user"
+  password_reseted: "Password reseted successfully"
   
   # Competetion
   competetion_created: "Competetion created successfully"
@@ -99,7 +115,6 @@ en:
   phase_deleted: "Phase deleted successfully"
   phase_not_found: "Phase not found"
   phase_changed: "Phase %{action}d successfully"
-  
   
   # Matches
   match: "match"
@@ -139,7 +154,7 @@ en:
   # Rules
   rules: "Rules"
   deadline_rule: "Deadline rule"
-  deadline_rule_description: "Only predictions made before deadline will be considered for score calculation"
+  deadline_rule_description: "Deadline for prediction will be 90mins before the Kick off<br>Only predictions made before deadline will be considered for score calculation"
   points_rules: "Points rule"
   points_rules_description: "1 point will rewarded for predicting both home team score and away team score correctly. 0 for all other cases"
   point_table_rules: "Point table rules"

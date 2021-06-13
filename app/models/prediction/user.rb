@@ -4,9 +4,12 @@ module Prediction
     attr_accessor :password
     has_many :user_predictions, dependent: :destroy
     validates_presence_of :full_name
-    validates :username, presence: true, format: { with: /\A[A-Za-z]{1}([A-Za-z0-9]{1}){4,9}([@, _]+[A-Za-z0-9]+\z)*/i }
+    validates :username, presence: true, format: { with: /\A[A-Za-z]{1}([A-Za-z0-9]{1}){2,9}([@ _]+[A-Za-z0-9]+\z)*/i,
+      message: :username_pattern_error}
     validates :phone_no, presence: true, format: { with: /(?:\+?|\b)[0-9]{10}\b/i}, if: Proc.new{|u| !u.is_admin?}
     validates :username, :phone_no, uniqueness: {scope: :is_deleted}
+    validates_length_of :username, minimum: 5, maximum: 25, if: Proc.new{|u| u.username}
+    validates_length_of :phone_no, minimum: 10, maximum: 10, if: Proc.new{|u| u.phone_no}
     validates :request_token, uniqueness: {scope: :is_deleted}, if: Proc.new{|u| u.request_token.present?}
     validates_presence_of :password, if: Proc.new{|u| (!u.hashed_password.present? || !u.password_salt.present?)}
     before_save :hash_password, if: Proc.new{|u| u.password.present?}
@@ -40,19 +43,6 @@ module Prediction
       update(total_score: sum)
     end
     
-    # Create a new user
-    def self.create_player(name, username, phone)
-      UserCreator.call(name, username, phone)
-    end
-    
-    # Create admin account
-    def self.create_admin
-      unless User.exists?(username: "admin")
-        Prediction::User.create(full_name: "Admin", username: "admin",
-          password: "admin", phone_no: "9745028467", is_admin: true)
-      end
-    end
-    
     # Update default password if new password matches else returns false
     def update_default_password(pass_params)
       if pass_params[:new_password] == pass_params[:confirm_password]
@@ -78,6 +68,29 @@ module Prediction
       end
       self.update(request_token: token)
       token
+    end
+    
+    # Deletes a user
+    def delete_user
+      self.update(is_active: false, is_deleted: true)
+    end
+    
+    # Resets the user password to default
+    def reset_password
+      self.update(password: "welcome@123", first_login: true)
+    end
+    
+    # Create a new user
+    def self.create_player(name, username, phone)
+      UserCreator.call(name, username, phone)
+    end
+    
+    # Create admin account
+    def self.create_admin
+      unless User.exists?(username: "admin")
+        Prediction::User.create(full_name: "Admin", username: "admin",
+          password: "admin", phone_no: "9745028467", is_admin: true)
+      end
     end
     
     private

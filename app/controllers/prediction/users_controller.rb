@@ -5,8 +5,8 @@ module Prediction
     skip_before_action :require_login, only: [:login, :new, :create]
     skip_before_action :check_for_first_login, only: [:change_password, :logout]
     before_action :check_logined_user, only: [:login, :new, :create] 
-    before_action :check_first_login_completed, only: [:change_password]
-    before_action :check_admin_permission, only: [:index, :approval]
+    before_action :check_admin_permission, only: [:index, :login_requests, :approval,
+      :destroy, :show, :reset_password]
     
     # Login page and authentication
     def login
@@ -26,7 +26,7 @@ module Prediction
     # Logout
     def logout
       session.delete(:jwt_token)
-      # cookies.delete(:jwt_token)
+      cookies.delete(:jwt_token)
       redirect_to root_path
     end
     
@@ -39,7 +39,7 @@ module Prediction
           password_match = @current_user.update_default_password(change_password_params)
           if password_match == true
             flash[:success] = t(:password_changed_successfully)
-            redirect_to root_path
+            redirect_to profile_user_path(@user)
           elsif password_match == ""
             flash[:danger] = t(:new_password_different_from_current_password)
           else
@@ -51,28 +51,8 @@ module Prediction
       end
     end
     
-    # Login request page
-    def new
-      @request_token = cookies.encrypted[:request_token]
-      flash[:warning] = t(:request_token_already_generated, token: @request_token) if @request_token
-      @user = User.new
-    end
-    
-    # Creates a login request/Inactive User
-    def create
-      @user = User.new(user_params)
-      if @user.save
-        @user.toggle_active_status
-        cookies.encrypted[:request_token] = @user.generate_request_token
-        flash[:success] = t(:request_token_generated, token: cookies.encrypted[:request_token])
-        redirect_to root_path
-      else
-        @errors = @user.errors.full_messages
-      end
-    end
-    
-    # Index
-    def index
+    # Login request list
+    def login_requests
       @users = User.not_deleted.players.login_requested
     end
     
@@ -96,10 +76,103 @@ module Prediction
       end
     end
     
+    # Index
+    def index
+      @users = User.not_deleted.active
+    end
+    
+    # Login request page
+    def new
+      @request_token = cookies.encrypted[:request_token]
+      flash[:warning] = t(:request_token_already_generated, token: @request_token) if @request_token
+      @user = User.new
+    end
+    
+    # Creates a login request/Inactive User
+    def create
+      @user = User.new(user_params)
+      if @user.save
+        @user.toggle_active_status
+        cookies.encrypted[:request_token] = @user.generate_request_token
+        flash[:success] = t(:request_token_generated, token: cookies.encrypted[:request_token])
+        redirect_to root_path
+      else
+        @errors = @user.errors.full_messages
+      end
+    end
+    
+    # Edit user
+    def edit
+      @user = (@current_user.is_admin? ? User.find_by_id(params[:id]) : @current_user)
+    end
+    
+    # Update user
+    def update
+      @user = (@current_user.is_admin? ? User.find_by_id(params[:id]) : @current_user)
+      @new_user = User.new(username: @user.username, password: user_params[:password])
+      @user.assign_attributes(user_params)
+      if @current_user.is_admin? || @new_user.authenticate
+        if @user.save
+          flash[:success] = t(:user_details_saved)
+          if @current_user.is_admin?
+            redirect_to user_path(@user)
+          else
+            redirect_to profile_user_path(@user)
+          end
+        else
+          @errors = @user.errors.full_messages
+          render action: :edit
+        end
+      else
+        flash[:danger] = t(:wrong_password)
+        render action: :edit
+      end
+    end
+    
+    # Deletes the user
+    def destroy
+      @user = User.find_by_id(params[:id])
+      if @user
+        if @user.delete_user
+          flash[:success] = t(:user_deleted)
+        else
+          flash[:danger] = t(:something_went_wrong)
+        end
+      else
+        flash[:danger] = t(:user_not_found)
+      end
+      redirect_back(fallback_location: users_path)
+    end
+    
+    # Show user details
+    def show
+      @user = User.find_by_id(params[:id])
+    end
+    
+    # User profile
+    def profile
+      @user = @current_user
+    end
+    
+    # Resets password if admin
+    def reset_password
+      @user = User.find_by_id(params[:id])
+      if @user
+        if @user.reset_password
+          flash[:success] = t(:password_reseted)
+        else
+          flash[:danger] = t(:something_went_wrong)
+        end
+      else
+        flash[:danger] = t(:user_not_found)
+      end
+      redirect_back(fallback_location: users_path)
+    end
+    
     private
       # User parameters
       def user_params
-        params.require(:user).permit(:full_name, :username, :password, :phone_no)
+        params.require(:user).permit(:full_name, :username, :password, :phone_no, :id)
       end
       
       # Login parameters
@@ -133,11 +206,6 @@ module Prediction
       # Redirect to root if user is already logined
       def check_logined_user
         redirect_to root_path if current_user
-      end
-      
-      # Redirect to root if not first login
-      def check_first_login_completed
-        redirect_to root_path unless current_user.first_login
       end
       
       # Fetch user if there is any cookie for site in browser
