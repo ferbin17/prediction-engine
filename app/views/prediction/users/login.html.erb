@@ -4,12 +4,14 @@
     <h1 class="h3 mb-3 fw-normal"> <%= "#{t(:please)} #{t(:sign_in)}" %></h1>
 
     <div class="form-floating">
-      <%= f.text_field :username, class: "form-control", id: "inputUsername", placeholder: t(:username), autocomplete: "off", required: true %>
+      <%= f.text_field :username, class: "form-control", id: "inputUsername",
+          placeholder: t(:username), autocomplete: "off", required: true %>
       <label for="inputUsername"><%= t(:username) %></label>
     </div>
     
     <div class="form-floating">
-      <%= f.password_field :password, class: "form-control", id: "inputPassword", placeholder: t(:password), required: true %>
+      <%= f.password_field :password, class: "form-control", id: "inputPassword",
+          placeholder: t(:password), required: true %>
       <label for="inputPassword"><%= t(:password) %></label>
     </div>
 

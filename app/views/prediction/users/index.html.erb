@@ -25,7 +25,9 @@
               <td class="table-dark"><%= user.full_name %></td>
               <td class="table-dark"><%= user.username %></td>
               <td class="table-dark"><%= user.phone_no %></td>
-              <td class="table-dark"><%= t((user.is_active? ? 'active' : 'inactive')) %></td>
+              <td class="table-dark">
+                <%= t((user.is_active? ? 'active' : 'inactive')) %>
+              </td>
               <td class="table-dark actions-td">
                 <%= link_to t(:user_details), user_path(user.id),
                     class: "btn btn-sm btn-outline-secondary" %>
@@ -40,7 +42,9 @@
           <% end %>
         <% else %>
           <tr class="table-dark">
-            <td class="table-dark no-item-message" colspan="5"><%= t(:no_players_registered_yet) %></td>
+            <td class="table-dark no-item-message" colspan="6">
+              <%= t(:no_players_registered_yet) %>
+            </td>
           </tr>
         <% end %>
       </tbody>

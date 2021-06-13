@@ -5,20 +5,7 @@
         <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">          
-              <div class="form-signin text-center user-profile-show">
-                <h1 class="h3 mb-3 fw-normal"> <%= @user.full_name %></h1>
-                <div class="form-floating">
-                  <%= text_field_tag :username, @user.username, class: "form-control",
-                      id: "inputUsername", disabled: true %>
-                  <label for="inputUsername"><%= t(:username) %></label>
-                </div>
-                  
-                <div class="form-floating">
-                  <%= text_field_tag :phone_no, @user.phone_no, class: "form-control",
-                      id: "inputPhone", disabled: true %>
-                  <label for="inputPhone"><%= t(:phone_no) %></label>
-                </div>
-              </div>
+              <%= render partial: "user_details", locals: {user: @user} %>
               
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">

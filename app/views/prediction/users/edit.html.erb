@@ -23,7 +23,8 @@
       
       <div class="form-floating">
         <%= f.password_field :password, class: "form-control",
-            id: "inputPassword", placeholder: t(:password), required: !@current_user.is_admin? %>
+            id: "inputPassword", placeholder: t(:password),
+            required: !@current_user.is_admin? %>
         <label for="inputPassword"><%= t(:password) %></label>
       </div>
 
