@@ -146,7 +146,7 @@ en:
   match_marked_as_ended: "Match marked as ended"
   home_team_score: "Home team score"
   away_team_score: "Away team score"
-  score_submitted: "Match score submitted successfully"
+  score_submitted_success: "Match score submitted successfully"
   edit_score_submission: "Edit score submiision"
   prediction_score_calculated: "Predicton scores calculated"
   match_score: "Match score"

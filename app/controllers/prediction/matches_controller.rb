@@ -68,7 +68,7 @@ module Prediction
     def submit_score
       if request.patch?
         if @match.submit_score(match_params[:home_team_score], match_params[:away_team_score])
-          flash[:success] = t(:score_submitted)
+          flash[:success] = t(:score_submitted_success)
         else
           @errors = @match.errors
         end
@@ -102,7 +102,7 @@ module Prediction
       
       # Finds match from parameters
       def find_match
-        @match = Match.not_deleted.find_by_id(params[:id])
+        @match = Match.not_deleted.includes(:home_team, :away_team).find_by_id(params[:id])
         unless @match
           flash.now[:danger] = t(:match_not_found)
           render head: :ok
@@ -111,7 +111,7 @@ module Prediction
       
       # Finds active match from parameters
       def find_active_match
-        @match = Match.find_by_id(params[:id])
+        @match = Match.includes(:home_team, :away_team).find_by_id(params[:id])
         unless @match
           flash.now[:danger] = t(:match_not_found)
           render head: :ok

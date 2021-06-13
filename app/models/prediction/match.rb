@@ -31,7 +31,7 @@ module Prediction
     
     # Check if deadline is over
     def can_edit?
-      return Time.now.in_time_zone("Chennai") <= (match_time.in_time_zone("Chennai") - 90.minutes)
+      return Time.now <= deadline
     end
     
     # Calculate predictions of a match
@@ -97,13 +97,15 @@ module Prediction
       
       # Check if match can be ended
       def validate_match_ended_value
-        unless match_time <= (Time.now + 90.minutes)
+        unless (match_time + 120.minutes) <= Time.now
           errors.add(:match_ended, :match_cant_be_ended_before_match_time)
         end
       end
       
       # Update score caculated status incase of score resubmission
       def update_score_calculated_status
+        predictions = user_predictions.calculated_predictions
+        predictions.update_all(point_calculated: false)
         self.update(score_calculated: false)
       end
   end
