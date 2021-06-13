@@ -12,20 +12,37 @@
         <% if @current_user %>
           <% if @current_user.is_admin? %>
             <li class="nav-item">
-              <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "table")}" %>
+              <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "predictions", "table")}" %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle <%= active_tab(params, "users", "users") %>" href="#" id="navbarUsersdropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <%= t(:users) %>
+              </a>
+              <ul class="dropdown-menu bg-dark users-nav" aria-labelledby="navbarUsersdropdown">
+                <li class="nav-item">
+                  <%= link_to t(:player_login_request), login_requests_users_path, class: "dropdown-item" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to t(:login_request_approval), approval_users_path, class: "dropdown-item" %>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li class="nav-item">
+                  <%= link_to t(:all_users), users_path, class: "dropdown-item" %>
+                </li>
+              </ul>
             </li>
             <li class="nav-item">
-              <%= link_to t(:settings), settings_path, class: "nav-link #{active_tab(params, "settings")}" %>
-            </li>
+              <%= link_to t(:settings), settings_path, class: "nav-link #{active_tab(params, "settings", "settings")}" %>
+            </li>            
           <% else %>
             <li class="nav-item">
-              <%= link_to t(:predict), root_path, class: "nav-link #{active_tab(params, "predict")}" %>
+              <%= link_to t(:predict), root_path, class: "nav-link #{active_tab(params, "predictions", "predict")}" %>
             </li>            
             <li class="nav-item">
-              <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "table")}" %>
+              <%= link_to t(:table), table_predictions_path, class: "nav-link #{active_tab(params, "predictions", "table")}" %>
             </li>
             <li class="nav-item">
-              <%= link_to t(:rules), rules_predictions_path, class: "nav-link #{active_tab(params, "rules")}" %>
+              <%= link_to t(:rules), rules_predictions_path, class: "nav-link #{active_tab(params, "predictions", "rules")}" %>
             </li>
             
             <li class="nav-item logout-sm">
@@ -34,10 +51,10 @@
           <% end %>
 
           <li class="nav-item logout-sm">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <%= image_tag "prediction/user-icon.png", class: "rounded-circle", alt: "user-icon", width: "32", height: "32" %>
             </a>
-            <ul class="dropdown-menu bg-dark dropdown-menu-sm" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu bg-dark dropdown-menu-sm" aria-labelledby="navbarUserDropdown">
               <li class="nav-item"><%= link_to t(:profile), profile_user_path(id: @current_user.id), class: "dropdown-item text-white" %></li>
               <li><hr class="dropdown-divider"></li>
               <li class="nav-item"><%= link_to t(:logout), logout_users_path, class: "dropdown-item text-white" %></li>
@@ -45,7 +62,7 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to t(:login_request), new_user_path, class: "nav-link #{active_tab(params, "new")}" %>
+            <%= link_to t(:login_request), new_user_path, class: "nav-link #{active_tab(params, "users", "new")}" %>
           </li>
         <% end %>
       </ul>

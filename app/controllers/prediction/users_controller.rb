@@ -39,7 +39,7 @@ module Prediction
           password_match = @current_user.update_default_password(change_password_params)
           if password_match == true
             flash[:success] = t(:password_changed_successfully)
-            redirect_to profile_user_path(@user)
+            redirect_to profile_user_path(@current_user)
           elsif password_match == ""
             flash[:danger] = t(:new_password_different_from_current_password)
           else

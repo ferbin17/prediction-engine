@@ -10,13 +10,19 @@ module Prediction
       end
     end
     
-    def active_tab(params, link)
-      if ["prediction/predictions", "prediction/users"].include?(params[:controller]) 
+    def active_tab(params, controller, link)
+      if ["prediction/predictions"].include?(params[:controller]) && params[:controller] == "prediction/#{controller}"
         if params[:action] == link
+          return "active"          
+        end
+      elsif params[:controller] == "prediction/settings" && params[:controller] == "prediction/#{controller}"
+          if params[:action] == "index" && link == "settings"
           return "active"
         end
-      elsif params[:controller] == "prediction/settings"
-        if params[:action] == "index" && link == "settings"
+      elsif params[:controller] == "prediction/users" && params[:controller] == "prediction/#{controller}"
+        if ["index", "approval", "login_requests"].include?(params[:action])
+          return "active"
+        elsif params[:controller] == "prediction/#{controller}" && params[:action] == link
           return "active"
         end
       end

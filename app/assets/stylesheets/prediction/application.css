@@ -129,6 +129,10 @@ a.disabled-link, a.disabled-link:hover{
   margin-right: 2%;
 }
 
+.users-nav .nav-item .dropdown-item{
+  color: rgba(255, 255, 255, 0.55);
+}
+
 @media only screen and (max-width: 991px) {
   .navbar .container{
     padding-right: var(--bs-gutter-x, 2rem);

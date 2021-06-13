@@ -51,6 +51,7 @@ en:
   following_errors_encountered: "Following errors encountered"
 
   # User
+  users: "Users"
   username: "Username"
   password: "Password"
   phone_no: "Phone no"
