@@ -93,6 +93,7 @@ en:
   user_details: "User details"
   delete_user: "Delete user"
   password_reseted: "Password reseted successfully"
+  total_point: "Total point"
   
   # Competetion
   competetion_created: "Competetion created successfully"
@@ -147,7 +148,7 @@ en:
   home_team_score: "Home team score"
   away_team_score: "Away team score"
   score_submitted_success: "Match score submitted successfully"
-  edit_score_submission: "Edit score submiision"
+  edit_score_submission: "Edit score submission"
   prediction_score_calculated: "Predicton scores calculated"
   match_score: "Match score"
   
@@ -164,6 +165,7 @@ en:
   total_no_of_predictions: "Total no. of predictions"
   no_of_calculated_predictions: "Total no. of calculated predictions"
   your_score: "Your score"
+  match_prediction_point_not_calculated_yet: "Prediction score not calculated yet"
   
   # settings
   settings: "Settings"

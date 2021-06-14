@@ -57,7 +57,7 @@ module Prediction
     # Marks the match as finished
     def end_match
       if @match.end_match
-        flash[:success] = t(:match_marked_as_ended)
+        flash.now[:success] = t(:match_marked_as_ended)
       else
         @errors = @match.errors.full_messages
         @match.reload
@@ -68,7 +68,7 @@ module Prediction
     def submit_score
       if request.patch?
         if @match.submit_score(match_params[:home_team_score], match_params[:away_team_score])
-          flash[:success] = t(:score_submitted_success)
+          flash.now[:success] = t(:score_submitted_success)
         else
           @errors = @match.errors
         end
@@ -78,7 +78,7 @@ module Prediction
     # calculate prediction score for a match
     def calculate_score
       if @match.calculate_scores_for_predictions
-        flash[:success] = t(:prediction_score_calculated)
+        flash.now[:success] = t(:prediction_score_calculated)
       else
         @errors = @match.errors
       end

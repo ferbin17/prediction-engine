@@ -6,7 +6,7 @@ module Prediction
     skip_before_action :check_for_first_login, only: [:change_password, :logout]
     before_action :check_logined_user, only: [:login, :new, :create] 
     before_action :check_admin_permission, only: [:index, :login_requests, :approval,
-      :destroy, :show, :reset_password]
+      :destroy, :reset_password]
     
     # Login page and authentication
     def login

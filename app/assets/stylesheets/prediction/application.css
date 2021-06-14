@@ -133,6 +133,10 @@ a.disabled-link, a.disabled-link:hover{
   color: rgba(255, 255, 255, 0.55);
 }
 
+.table td a, .table td a:hover{
+  color: #fff;
+}
+
 @media only screen and (max-width: 991px) {
   .navbar .container{
     padding-right: var(--bs-gutter-x, 2rem);

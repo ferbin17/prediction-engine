@@ -24,7 +24,7 @@
         <%= t(:your_score) %>: <strong><%= "#{prediction.score}" %></strong><br>
       <% end %>
     <% else %>
-      <%= t(:deadline) %>: <strong><%= "#{format_time(match.deadline, :datetime)}" %></strong><br>
+      <%= t(:match_prediction_point_not_calculated_yet) %><br>
     <% end %>
     <%= t(:friends_predicted, count: @count.dig(match.id).to_i) %>
   </div>

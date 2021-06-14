@@ -22,8 +22,8 @@
             <% @users.each_with_index do |user, position| %>
               <tr class="table-dark">
                 <td class="table-dark"><%= position + 1 %></td>
-                <td class="table-dark"><%= user.full_name %></td>
-                <td class="table-dark"><%= user.username %></td>
+                <td class="table-dark"><%= link_to user.full_name, user_path(user) %></td>
+                <td class="table-dark"><%= link_to user.username, user_path(user) %></td>
                 <td class="table-dark"><%= user.phone_no %></td>
                 <td class="table-dark">
                   <%= t((user.is_active? ? 'active' : 'inactive')) %>

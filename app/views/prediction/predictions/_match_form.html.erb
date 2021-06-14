@@ -10,7 +10,7 @@
         <div class="match-details">
           <div class="home-team team">
             <span class="team-name-long"><%= match.home_team.name %></span>
-            <span><%= match.home_team.short_name %></span>
+            <span class="team-name-long">(</span><span><%= match.home_team.short_name %></span><span class="team-name-long">)</span>      
           </div>
           <div class="scoreline">
             <div class="quantity quantity-div-left">
@@ -23,7 +23,7 @@
           </div>
           <div class="away-team team">
             <span class="team-name-long"><%= match.away_team.name %></span>
-            <span><%= match.away_team.short_name %></span>
+            <span class="team-name-long">(</span><span><%= match.away_team.short_name %></span><span class="team-name-long">)</span>
           </div>
         </div>
       </div>

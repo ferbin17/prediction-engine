@@ -11,4 +11,10 @@
         id: "inputPhone", disabled: true %>
     <label for="inputPhone"><%= t(:phone_no) %></label>
   </div>
+  
+  <div class="form-floating">
+    <%= text_field_tag :total_point, user.total_point, class: "form-control",
+        id: "inputTotalpoint", disabled: true %>
+    <label for="inputTotalpoint"><%= t(:total_point) %></label>
+  </div>
 </div>

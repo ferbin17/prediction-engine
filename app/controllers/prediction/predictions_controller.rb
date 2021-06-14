@@ -29,8 +29,9 @@ module Prediction
     
     # Point table
     def table
-      @users = User.players.left_joins(:user_predictions).select(:id, :full_name, :total_point).
-          group(:id).order('total_point DESC, COUNT(prediction_user_predictions.id) ASC').includes(:user_predictions)
+      @users = User.players.joins("left join (select user_id, count(id) as calculated_count from prediction_user_predictions where point_calculated = TRUE group by user_id) as calculated_table on prediction_users.id = calculated_table.user_id left join (select user_id, count(id) as all_predictions_count from prediction_user_predictions group by user_id) as predictions_table on prediction_users.id = predictions_table.user_id").
+        select("prediction_users.id, full_name, calculated_count, all_predictions_count, total_point").
+        order("total_point desc, ISNULL(calculated_count), calculated_count asc, full_name asc")
     end
     
     # Shows rules
