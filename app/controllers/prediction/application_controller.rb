@@ -22,7 +22,7 @@ module Prediction
 
       # Set current_user value
       def current_user
-        @current_user ||= User.active.find_by_id(current_user_id)
+        @current_user ||= User.find_by_id(current_user_id)
       end
       
       # Creates JWT token

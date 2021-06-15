@@ -11,18 +11,20 @@ module Prediction
     after_save :update_competetion_phases
     scope :active, -> { where(is_active: true) }
     scope :not_deleted, -> { unscoped.where(is_deleted: false)}
-    scope :current_phase, -> { active.order(:order).limit(1) }
+    scope :finished_phases, -> { where(phase_completed: true) }
+    scope :unfinished_phases, -> { where(phase_completed: false) }
+    scope :current_phase, -> { unfinished_phases.order(:order).limit(1) }
     
     # Returns previous phase id if present
     def previous_phase
-      previous_phase = Phase.active.where("`order` < #{order}").order(order: :desc).limit(1).first
+      previous_phase = Phase.where("`order` < #{order}").order(order: :desc).limit(1).first
       previous_phase_id = previous_phase.id if previous_phase
       previous_phase_id
     end
     
     # Returns next phase id if present
     def next_phase
-      next_phase = Phase.active.where("`order` > #{order}").order(:order).limit(1).first
+      next_phase = Phase.where("`order` > #{order}").order(:order).limit(1).first
       next_phase_id = next_phase.id if next_phase
       next_phase_id
     end

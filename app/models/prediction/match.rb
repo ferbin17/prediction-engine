@@ -10,9 +10,9 @@ module Prediction
     validates :home_team_score, :away_team_score, numericality: { only_integer: true }, if: Proc.new{|m| (m.home_team_score || m.away_team_score)}
     validate :same_teams, if: Proc.new{|m| m.home_team && m.away_team}
     validate :validate_match_ended_value, if: Proc.new{|m| m.match_ended_changed? && m.match_ended}
-    after_save :update_phase_status, if: Proc.new{|m| m.match_ended_changed?}
-    after_save :update_competetion_dates, if: Proc.new{|m| m.match_time_changed?}
-    after_save :update_phase_dates, if: Proc.new{|m| m.match_time_changed?}
+    after_save :update_phase_status, if: Proc.new{|m| m.match_ended}
+    after_save :update_competetion_dates, if: Proc.new{|m| m.match_time}
+    after_save :update_phase_dates, if: Proc.new{|m| m.match_time}
     after_save :update_phase_matches_count
     scope :active, -> { where(is_active: true) }
     scope :not_deleted, -> { unscoped.where(is_deleted: false)}

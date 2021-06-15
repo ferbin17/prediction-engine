@@ -30,7 +30,7 @@ module Prediction
     
     # Authenticate password
     def authenticate
-      user = User.active.where(username: self.username).first
+      user = User.where(username: self.username).first
       if user.present?
         return user.hashed_password == Digest::SHA1.hexdigest(user.password_salt.to_s + self.password)
       end
