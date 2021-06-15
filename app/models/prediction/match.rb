@@ -83,8 +83,8 @@ module Prediction
       
       # Update competetion start and end date whenever a new match is updated
       def update_competetion_dates
-        first_match_time = competetion.matches.order(:match_time).limit(1).pluck(:match_time).first
-        last_match_time = competetion.matches.order(match_time: :desc).limit(1).pluck(:match_time).first
+        first_match_time = competetion.phases.joins(:matches).select("prediction_matches.match_time").collect(&:match_time).sort.first
+        last_match_time = competetion.phases.joins(:matches).select("prediction_matches.match_time").collect(&:match_time).sort.last
         competetion.update(start_datetime: first_match_time, end_datetime: last_match_time)
       end
       
@@ -92,7 +92,7 @@ module Prediction
       def update_phase_dates
         first_match_time = phase.matches.order(:match_time).limit(1).pluck(:match_time).first
         last_match_time = phase.matches.order(match_time: :desc).limit(1).pluck(:match_time).first
-        competetion.update(start_datetime: first_match_time, end_datetime: last_match_time)
+        phase.update(start_datetime: first_match_time, end_datetime: last_match_time)
       end
       
       # Check if match can be ended
