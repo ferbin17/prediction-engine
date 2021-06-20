@@ -170,6 +170,7 @@ en:
   match_prediction_point_not_calculated_yet: "Prediction score not calculated yet"
   no_predictions_made_for_match: "No predictions made for this match"
   user_score: "%{user}'s score"
+  prediction_last_updated_at: "Prediction last updated at %{time}"
   
   # settings
   settings: "Settings"

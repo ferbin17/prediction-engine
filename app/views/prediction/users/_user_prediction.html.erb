@@ -31,5 +31,8 @@
         <%= t(:no_predictions_made_for_match) %>
       <% end %>
     <% end %>
+    <% if prediction && prediction.prediction_updated_at %>
+      <%= t(:prediction_last_updated_at, time: format_time(prediction.prediction_updated_at, :datetime)) %>
+    <% end %>
   </div>
 </div>
