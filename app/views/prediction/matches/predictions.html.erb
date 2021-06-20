@@ -1,0 +1,16 @@
+<div class="card text-center matches-container">
+  <div class="card-header">
+    <strong id="match-link-lg"><%= @match.full_name %></strong>
+    <strong id="match-link-sm"><%= @match.short_full_name %></strong>
+  </div>
+  <div class="card-body">
+    <% if @user_predictions.present? %>
+      <% @user_predictions.each do |user_prediction| %>
+        <%= render partial: "user_prediction", locals: {user_prediction: user_prediction, match: @match} %>
+      <% end %>
+    <% else %>
+      <%= t(:no_predictions_made_for_match) %>
+    <% end %>
+  </div>
+  <div class="card-footer text-muted"><%= @competetion.name %></div>
+</div>

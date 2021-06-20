@@ -6,7 +6,7 @@ module Prediction
     
     # Index
     def index
-      @competetions = Competetion.unscoped.where(is_deleted: false).includes(phases: {matches: [:home_team, :away_team]})
+      @competetions = Competetion.not_deleted.includes(phases: {matches: [:home_team, :away_team]})
       @login_request_count = User.not_deleted.players.login_requested.count
     end
     

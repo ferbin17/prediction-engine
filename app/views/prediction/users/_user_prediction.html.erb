@@ -22,11 +22,14 @@
     <% if match.match_ended? && match.score_submitted? %>
       <%= t(:match_score) %>: <strong><%= "#{match.home_team_score} - #{match.away_team_score}" %></strong><br>
       <% if match.score_calculated? && prediction && prediction.point_calculated? %>
-        <%= t(:your_score) %>: <strong><%= "#{prediction.score}" %></strong><br>
+        <%= t(:score) %>: <strong><%= "#{prediction.score}" %></strong><br>
       <% end %>
     <% else %>
-      <%= t(:match_prediction_point_not_calculated_yet) %><br>
+      <% if prediction %>
+        <%= t(:match_prediction_point_not_calculated_yet) %><br>
+      <% else %>
+        <%= t(:no_predictions_made_for_match) %>
+      <% end %>
     <% end %>
-    <%= t(:friends_predicted, count: @count.dig(match.id).to_i) %>
   </div>
 </div>

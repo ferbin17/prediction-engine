@@ -50,7 +50,7 @@ module Prediction
     
     # Show the phases of competetion
     def show
-      @phases = @competetion.phases.includes(matches: [:home_team, :away_team])
+      @phases = @competetion.phases.not_deleted.includes(matches: [:home_team, :away_team])
     end
     
     private

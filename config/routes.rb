@@ -14,6 +14,7 @@ Prediction::Engine.routes.draw do
       get 'change_password'
       post 'change_password'
       get 'reset_password'
+      get 'predictions'
     end
   end
   
@@ -53,6 +54,7 @@ Prediction::Engine.routes.draw do
       get 'submit_score'
       patch 'submit_score'
       get 'calculate_score'
+      get 'predictions'
     end
   end
   

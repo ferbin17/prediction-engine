@@ -7,6 +7,7 @@ module Prediction
     before_action :check_logined_user, only: [:login, :new, :create] 
     before_action :check_admin_permission, only: [:index, :login_requests, :approval,
       :destroy, :reset_password]
+    before_action :find_user, only: [:destroy, :show, :reset_password, :predictions]
     
     # Login page and authentication
     def login
@@ -132,7 +133,6 @@ module Prediction
     
     # Deletes the user
     def destroy
-      @user = User.find_by_id(params[:id])
       if @user
         if @user.delete_user
           flash[:success] = t(:user_deleted)
@@ -147,7 +147,6 @@ module Prediction
     
     # Show user details
     def show
-      @user = User.find_by_id(params[:id])
     end
     
     # User profile
@@ -157,7 +156,6 @@ module Prediction
     
     # Resets password if admin
     def reset_password
-      @user = User.find_by_id(params[:id])
       if @user
         if @user.reset_password
           flash[:success] = t(:password_reseted)
@@ -168,6 +166,12 @@ module Prediction
         flash[:danger] = t(:user_not_found)
       end
       redirect_back(fallback_location: users_path)
+    end
+    
+    # Shows the predictions of a user
+    def predictions
+      fetch_matches
+      @user_predictions = @user.user_locked_predictions_in_phase(@phase.id) if @phase
     end
     
     private
@@ -221,6 +225,29 @@ module Prediction
       # Redirect to settngs if not login request
       def check_for_any_login_request
         redirect_to settings_path unless User.not_deleted.players.login_requested.count > 0
+      end
+      
+      # Find user
+      def find_user
+        @user = User.find_by_id(params[:id])
+        unless @user
+          flast[:danger] = t(:user_not_found)
+          redirect_to root_path
+        end
+      end
+      
+      # Fetch matches from parameters else first competetion
+      def fetch_matches
+        if params[:p_id].present?
+          @phase = Phase.find_by_id(params[:p_id])
+          @competetion = @phase.competetion if @phase
+        else
+          @competetion = Competetion.first
+          @phase = @competetion.phases.current_phase.try(:first) if @competetion
+        end
+        if @phase
+          @matches = @phase.matches.order(:match_time).includes(:home_team, :away_team, :user_predictions)
+        end
       end
   end
 end

@@ -2,9 +2,9 @@ require_dependency "prediction/application_controller"
 
 module Prediction
   class MatchesController < ApplicationController
-    before_action :check_admin_permission
+    before_action :check_admin_permission, except: [:predictions]
     before_action :find_phase, only: [:new, :create]
-    before_action :find_match, only: [:edit, :update, :destroy, :confirm_match]
+    before_action :find_match, only: [:edit, :update, :destroy, :confirm_match, :predictions]
     before_action :find_active_match, only: [:end_match, :submit_score, :calculate_score]
     
     # New match popup
@@ -84,6 +84,13 @@ module Prediction
       end
     end
     
+    # Shows the predictions of a match
+    def predictions
+      redirect_if_deadline_not_over
+      @user_predictions = @match.user_predictions.includes(:user).includes(match: [:home_team, :away_team])
+      @competetion = @match.competetion
+    end
+    
     private
       # Fetch match parameters
       def match_params
@@ -104,8 +111,13 @@ module Prediction
       def find_match
         @match = Match.not_deleted.includes(:home_team, :away_team).find_by_id(params[:id])
         unless @match
-          flash.now[:danger] = t(:match_not_found)
-          render head: :ok
+          if request.xhr?
+            flash.now[:danger] = t(:match_not_found)
+            render head: :ok
+          else
+            flash[:danger] = t(:match_not_found)
+            redirect_to settings_path
+          end
         end
       end
       
@@ -128,6 +140,14 @@ module Prediction
         rescue => e
           @match.errors.add(:match_time, :invalid_date_time)
           return false
+        end
+      end
+      
+      # Redirect if match is deadline not over
+      def redirect_if_deadline_not_over
+        unless @match.deadline <= Time.now
+          flash[:warning] = t(:match_deadline_is_not_over)
+          redirect_to root_path
         end
       end
             

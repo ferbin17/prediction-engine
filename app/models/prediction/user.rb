@@ -18,11 +18,21 @@ module Prediction
     scope :players, -> { where(is_admin: false) }
     scope :login_requested, -> { where("is_active = FALSE AND request_token IS NOT NULL") }
     
-    # Fetches predicted mattches in a phase
+    # Fetches predicted matches in a phase
     def user_predictions_in_phase(phase_id)
       phase = Phase.find_by_id(phase_id)
       if phase
         match_ids = phase.matches.pluck(:id)
+        return user_predictions.where(match_id: match_ids).group_by(&:match_id)
+      end
+      return {}
+    end
+    
+    # Fetches locked predicted matches in a phase
+    def user_locked_predictions_in_phase(phase_id)
+      phase = Phase.find_by_id(phase_id)
+      if phase
+        match_ids = phase.matches.where("match_time < ?", Time.now).pluck(:id)
         return user_predictions.where(match_id: match_ids).group_by(&:match_id)
       end
       return {}

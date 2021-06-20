@@ -1,6 +1,6 @@
 module Prediction
   class Match < ApplicationRecord
-    default_scope -> { where(is_active: true, is_deleted: false) } 
+    # default_scope -> { where(is_active: true, is_deleted: false) } 
     belongs_to :competetion
     belongs_to :phase
     belongs_to :home_team, foreign_key: :home_team_id, class_name: "Team"
@@ -22,6 +22,11 @@ module Prediction
     # Display name of match
     def full_name
       "#{home_team.full_name} vs #{away_team.full_name}"
+    end
+    
+    # Display short name of match
+    def short_full_name
+      "#{home_team.short_name} vs #{away_team.short_name}"
     end
     
     # Return deadline of match

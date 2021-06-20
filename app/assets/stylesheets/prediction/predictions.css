@@ -147,6 +147,20 @@
   text-align: center;
 }
 
+.match-link a{
+  color: #000;  
+  text-decoration: none;
+}
+
+.match-link a:hover{
+  color: #000;
+  text-decoration: underline;
+}
+
+#match-link-sm{
+  display: none;
+}
+
 @media only screen and (max-width: 991px) {
   .card{
     font-size: 1rem;
@@ -187,5 +201,13 @@
   
   .no-of{
     display: none;
+  }
+  
+  #match-link-lg{
+    display: none;
+  }
+  
+  #match-link-sm{
+    display: block;
   }
 }

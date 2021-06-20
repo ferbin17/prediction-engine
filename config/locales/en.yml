@@ -124,6 +124,7 @@ en:
   phase_changed: "Phase %{action}d successfully"
   
   # Matches
+  match_text: "Match"
   match: "match"
   matches: "Matches"
   match_time: "Match time"
@@ -151,6 +152,7 @@ en:
   edit_score_submission: "Edit score submission"
   prediction_score_calculated: "Predicton scores calculated"
   match_score: "Match score"
+  match_deadline_is_not_over: "Match deadline is not over"
   
   # User Prediction
   predictions: "Predictions"
@@ -166,6 +168,8 @@ en:
   no_of_calculated_predictions: "Total no. of calculated predictions"
   your_score: "Your score"
   match_prediction_point_not_calculated_yet: "Prediction score not calculated yet"
+  no_predictions_made_for_match: "No predictions made for this match"
+  user_score: "%{user}'s score"
   
   # settings
   settings: "Settings"

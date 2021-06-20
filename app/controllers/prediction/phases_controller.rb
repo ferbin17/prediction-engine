@@ -52,7 +52,7 @@ module Prediction
     
     # Shows matches of the phase
     def show
-      @matches = @phase.matches.includes(:home_team, :away_team)
+      @matches = @phase.matches.not_deleted.includes(:home_team, :away_team)
     end
     
     private

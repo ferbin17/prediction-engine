@@ -1,0 +1,30 @@
+<div class="card text-center">
+  <div class="card-header">
+    <%= @user.full_name %>
+  </div>
+  <div class="card-body">
+    <div class="card text-center">
+      <div class="card-header">
+        <% if @phase %>
+          <div class="arrow">
+            <%= left_arrow_user_link(@user.id, @phase.previous_phase) %>
+          </div>
+          <div class="header-btw-arrows"><%= @phase.name %></div>
+          <div class="arrow">
+            <%= right_arrow_user_link(@user.id, @phase.next_phase) %>
+          </div>
+        </div>
+        <div class="card-body">
+          <% if @matches.present? %>
+            <% @matches.each do |match| %>
+              <%= render partial: "user_prediction", locals: {match: match, prediction: @user_predictions[match.id].try(:first)} %>
+            <% end %>
+          <% else %>
+            <%= t(:no_matches_created_by_admin) %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="card-footer text-muted"><%= @competetion.name %></div>
+    </div>
+  </div>
+</div>

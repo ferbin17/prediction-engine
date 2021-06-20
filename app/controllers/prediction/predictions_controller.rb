@@ -43,10 +43,10 @@ module Prediction
       def fetch_matches
         if params[:id].present?
           @phase = Phase.find_by_id(params[:id])
-          @competetion = @phase.competetion
+          @competetion = @phase.competetion if @phase
         else
           @competetion = Competetion.first
-          @phase = @competetion.phases.current_phase.try(:first)
+          @phase = @competetion.phases.current_phase.try(:first) if @competetion
         end
         if @phase
           @matches = @phase.matches.order(:match_time).includes(:home_team, :away_team, :user_predictions)
